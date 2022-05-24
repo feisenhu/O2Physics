@@ -274,7 +274,7 @@ AnalysisCompositeCut* o2::aod::dqcuts::GetCompositeCut(const char* cutName)
     return cut;
   }
 
-    if (!nameStr.compare("lmee_GlobalTrackRun3_TPC_ePID_lowPt")) {
+  if (!nameStr.compare("lmee_GlobalTrackRun3_TPC_ePID_lowPt")) {
     cut->AddCut(GetAnalysisCut("lmeeLowBKine"));
     cut->AddCut(GetAnalysisCut("TightGlobalTrackRun3"));
     cut->AddCut(GetAnalysisCut("standardPrimaryTrack"));
