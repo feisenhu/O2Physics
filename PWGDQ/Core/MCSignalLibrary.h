@@ -46,8 +46,8 @@ MCSignal* o2::aod::dqmcsignals::GetMCSignal(const char* name)
     return signal;
   }
   if (!nameStr.compare("photon")) {
-    MCProng prong(1, {22}, {true}, {false}, {0}, {0}, {false});        // define 1-generation prong using the full constructor
-    signal = new MCSignal(name, "Photon", {prong}, {-1}); // define the signal using the full constructor
+    MCProng prong(1, {22}, {true}, {false}, {0}, {0}, {false}); // define 1-generation prong using the full constructor
+    signal = new MCSignal(name, "Photon", {prong}, {-1});       // define the signal using the full constructor
     return signal;
   }
   if (!nameStr.compare("kaonFromPhi")) {
@@ -180,7 +180,7 @@ MCSignal* o2::aod::dqmcsignals::GetMCSignal(const char* name)
   }
   if (!nameStr.compare("Pi0decayTOe")) {
     MCProng prong(2, {111, 11}, {true, true}, {false, false}, {0, 0}, {0, 0}, {false, false});
-    prong.SetSignalInTime(0, true);  // set direction to check for daughters (true, in time) or for mothers (false, back in time)
+    prong.SetSignalInTime(0, true); // set direction to check for daughters (true, in time) or for mothers (false, back in time)
     signal = new MCSignal(name, "Pi0 decays into an electron", {prong}, {-1});
     return signal;
   }
