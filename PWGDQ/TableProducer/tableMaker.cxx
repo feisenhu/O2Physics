@@ -132,7 +132,8 @@ struct TableMaker {
     fHistMan->SetUseDefaultVariableNames(kTRUE);
     fHistMan->SetDefaultVarNames(VarManager::fgVariableNames, VarManager::fgVariableUnits);
 
-    if (!fConfigQA && fConfigDetailedQA) fConfigDetailedQA = false;
+    if (!fConfigQA && fConfigDetailedQA)
+      fConfigDetailedQA = false;
 
     // Create the histogram class names to be added to the histogram manager
     TString histClasses = "";

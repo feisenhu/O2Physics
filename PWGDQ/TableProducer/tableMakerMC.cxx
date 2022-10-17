@@ -161,7 +161,7 @@ struct TableMakerMC {
       histClasses += "Event_BeforeCuts;";
     }
     if (fConfigQA) {
-     histClasses += "Event_AfterCuts;";
+      histClasses += "Event_AfterCuts;";
     }
 
     bool enableBarrelHistos = (context.mOptions.get<bool>("processFull") || context.mOptions.get<bool>("processFullWithCov") ||
