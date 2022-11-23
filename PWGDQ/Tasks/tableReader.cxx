@@ -32,7 +32,6 @@
 #include <THashList.h>
 #include <TString.h>
 
-
 using std::cout;
 using std::endl;
 using std::string;
