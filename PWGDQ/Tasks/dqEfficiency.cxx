@@ -26,12 +26,12 @@
 #include "PWGDQ/Core/CutsLibrary.h"
 #include "PWGDQ/Core/MCSignal.h"
 #include "PWGDQ/Core/MCSignalLibrary.h"
+#include <iostream>
+#include <vector>
 #include <TMath.h>
 #include <TH1F.h>
 #include <THashList.h>
 #include <TString.h>
-#include <iostream>
-#include <vector>
 
 using std::cout;
 using std::endl;

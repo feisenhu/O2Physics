@@ -24,12 +24,12 @@
 #include "PWGDQ/Core/HistogramsLibrary.h"
 #include "PWGDQ/Core/CutsLibrary.h"
 #include "PWGDQ/Core/MixingLibrary.h"
-#include <TH1F.h>
-#include <THashList.h>
-#include <TString.h>
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <TH1F.h>
+#include <THashList.h>
+#include <TString.h>
 
 using std::cout;
 using std::endl;
