@@ -33,6 +33,7 @@
 #include "PWGDQ/Core/CutsLibrary.h"
 #include "PWGDQ/Core/MCSignal.h"
 #include "PWGDQ/Core/MCSignalLibrary.h"
+<<<<<<< HEAD
 #include "PWGDQ/DataModel/ReducedInfoTables.h"
 #include "Common/DataModel/PIDResponse.h"
 #include "Common/DataModel/TrackSelectionTables.h"
@@ -40,6 +41,8 @@
 #include "Common/DataModel/EventSelection.h"
 #include "Common/DataModel/Centrality.h"
 #include "Common/CCDB/TriggerAliases.h"
+=======
+>>>>>>> de55abf2 (PWGDQ/EM: fix MegaLinter errors)
 
 using std::cout;
 using std::endl;
