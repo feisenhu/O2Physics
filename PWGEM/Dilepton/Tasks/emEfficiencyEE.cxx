@@ -41,10 +41,10 @@
 #include "Common/DataModel/EventSelection.h"
 #include "Common/DataModel/Centrality.h"
 #include "Common/CCDB/TriggerAliases.h"
-=======
+  =======
 >>>>>>> de55abf2 (PWGDQ/EM: fix MegaLinter errors)
 
-using std::cout;
+  using std::cout;
 using std::endl;
 using std::string;
 
