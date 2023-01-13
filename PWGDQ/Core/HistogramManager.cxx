@@ -578,9 +578,9 @@ void HistogramManager::AddHistogram(const char* histClass, const char* hname, co
     fUsedVars[vars[idim]] = kTRUE;
   }
   if (useSparse) {
-    hList->Add(reinterpret_cast<THnSparseF*> (h));
+    hList->Add(reinterpret_cast<THnSparseF*>(h));
   } else {
-    hList->Add(reinterpret_cast<THnF*> (h));
+    hList->Add(reinterpret_cast<THnF*>(h));
   }
 
   fBinsAllocated += nbins;
@@ -671,9 +671,9 @@ void HistogramManager::AddHistogram(const char* histClass, const char* hname, co
     fUsedVars[vars[idim]] = kTRUE;
   }
   if (useSparse) {
-    hList->Add(reinterpret_cast<THnSparseF*> (h));
+    hList->Add(reinterpret_cast<THnSparseF*>(h));
   } else {
-    hList->Add(reinterpret_cast<THnF*> (h));
+    hList->Add(reinterpret_cast<THnF*>(h));
   }
   fBinsAllocated += bins;
 }
