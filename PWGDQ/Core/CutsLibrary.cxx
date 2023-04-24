@@ -1625,7 +1625,7 @@ AnalysisCut* o2::aod::dqcuts::GetAnalysisCut(const char* cutName)
 
   if (!nameStr.compare("PrimaryTrack_looseDCA")) {
     cut->AddCut(VarManager::kTrackDCAxy, -3.0, 3.0);
-    cut->AddCut(VarManager::kTrackDCAZ, -3.0, 3.0); 
+    cut->AddCut(VarManager::kTrackDCAZ, -3.0, 3.0);
     return cut;
   }
 
