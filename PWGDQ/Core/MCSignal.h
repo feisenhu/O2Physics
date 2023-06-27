@@ -342,4 +342,4 @@ bool MCSignal::CheckProng(int i, bool checkSources, const U& mcStack, const T& t
   return true;
 }
 
-#endif  // PWGDQ_CORE_MCSIGNAL_H_
+#endif // PWGDQ_CORE_MCSIGNAL_H_
