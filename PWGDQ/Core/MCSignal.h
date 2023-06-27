@@ -131,7 +131,7 @@ template <typename U, typename T>
 bool MCSignal::CheckProng(int i, bool checkSources, const U& mcStack, const T& track)
 {
   auto currentMCParticle = track;
-  
+
   // check if mother pdg is in history
   if (fProngs[i].fPDGInHistory) {
     std::vector<bool> pdgInHistory;
@@ -177,11 +177,12 @@ bool MCSignal::CheckProng(int i, bool checkSources, const U& mcStack, const T& t
       }
     }
 
-    // while find mothers, check if they have provided PDG codes 
+    // while find mothers, check if they have provided PDG codes
     int nIncludedPDG = 0;
     for (int k = 1; k < fProngs[i].fPDGcodes.size(); k++) {
       currentMCParticle = track;
-      if (!fProngs[i].fExcludePDG[k]) nIncludedPDG++;
+      if (!fProngs[i].fExcludePDG[k])
+        nIncludedPDG++;
       int ith = 0;
       while (currentMCParticle.has_mothers()) {
         auto mother = mcStack.iteratorAt(currentMCParticle.mothersIds()[0]);
@@ -201,8 +202,7 @@ bool MCSignal::CheckProng(int i, bool checkSources, const U& mcStack, const T& t
     }
     if (pdgInHistory.size() == nIncludedPDG) { // vector has as many entries as mothers defined for prong
       return true;
-    }
-    else 
+    } else
       return false;
   }
 
