@@ -53,8 +53,8 @@ process(aod::McParticles const& mcTracks) {
 }
 }
 */
-#ifndef MCSignal_H
-#define MCSignal_H
+#ifndef PWGDQ_CORE_MCSIGNAL_H_
+#define PWGDQ_CORE_MCSIGNAL_H_
 
 #include "MCProng.h"
 #include "TNamed.h"
@@ -342,4 +342,4 @@ bool MCSignal::CheckProng(int i, bool checkSources, const U& mcStack, const T& t
   return true;
 }
 
-#endif
+#endif  // PWGDQ_CORE_MCSIGNAL_H_
