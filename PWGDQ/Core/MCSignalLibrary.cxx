@@ -200,7 +200,7 @@ MCSignal* o2::aod::dqmcsignals::GetMCSignal(const char* name)
     signal = new MCSignal(name, "All prompt charm hadrons (not from beauty)", {prong}, {-1});
     return signal;
   }
-  if (!nameStr.compare("Pi0decayTOe")) {
+  if (!nameStr.compare("Pi0decayToe")) {
     MCProng prong(2, {111, 11}, {true, true}, {false, false}, {0, 0}, {0, 0}, {false, false});
     prong.SetSignalInTime(true); // set direction to check for daughters (true, in time) or for mothers (false, back in time)
     signal = new MCSignal(name, "Pi0 decays into an electron", {prong}, {-1});
@@ -515,6 +515,12 @@ MCSignal* o2::aod::dqmcsignals::GetMCSignal(const char* name)
 
   //_________________________________________________________________________________________________________________________
   // LMEE pair signals for LF, same mother
+  if (!nameStr.compare("eeFromAnything")) {
+    MCProng prong(2, {11, MCProng::kPDGCodeNotAssigned}, {true, true}, {false, false}, {0, 0}, {0, 0}, {false, false});
+    prong.SetSourceBit(0, MCProng::kPhysicalPrimary);
+    signal = new MCSignal(name, "ee pairs from pi0 decays", {prong, prong}, {1, 1}); // signal at pair level
+    return signal;
+  }
   if (!nameStr.compare("eeFromPi0")) {
     MCProng prong(2, {11, 111}, {true, true}, {false, false}, {0, 0}, {0, 0}, {false, false});
     prong.SetSourceBit(0, MCProng::kPhysicalPrimary);
