@@ -64,17 +64,17 @@ using MyEventsAOD = soa::Join<aod::Collisions, aod::EvSels, aod::McCollisionLabe
 using MyEventsSelectedAOD = soa::Join<aod::Collisions, aod::EvSels, aod::McCollisionLabels, aod::EventCuts>;
 using MyMCEventsSelectedAOD = soa::Join<aod::McCollisions, aod::EventMCCuts>;
 using MyBarrelTracksAOD = soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksCov, aod::TracksDCA, aod::TrackSelection,
-                                          aod::pidTPCFullEl, aod::pidTPCFullMu, aod::pidTPCFullPi,
-                                          aod::pidTPCFullKa, aod::pidTPCFullPr,
-                                          aod::pidTOFFullEl, aod::pidTOFFullMu, aod::pidTOFFullPi,
-                                          aod::pidTOFFullKa, aod::pidTOFFullPr, aod::pidTOFbeta,
-                                          aod::McTrackLabels>;
+                                    aod::pidTPCFullEl, aod::pidTPCFullMu, aod::pidTPCFullPi,
+                                    aod::pidTPCFullKa, aod::pidTPCFullPr,
+                                    aod::pidTOFFullEl, aod::pidTOFFullMu, aod::pidTOFFullPi,
+                                    aod::pidTOFFullKa, aod::pidTOFFullPr, aod::pidTOFbeta,
+                                    aod::McTrackLabels>;
 using MyBarrelTracksSelectedAOD = soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksCov, aod::TracksDCA, aod::TrackSelection,
-                                                  aod::pidTPCFullEl, aod::pidTPCFullMu, aod::pidTPCFullPi,
-                                                  aod::pidTPCFullKa, aod::pidTPCFullPr,
-                                                  aod::pidTOFFullEl, aod::pidTOFFullMu, aod::pidTOFFullPi,
-                                                  aod::pidTOFFullKa, aod::pidTOFFullPr, aod::pidTOFbeta,
-                                                  aod::BarrelTrackCuts, aod::McTrackLabels>;
+                                            aod::pidTPCFullEl, aod::pidTPCFullMu, aod::pidTPCFullPi,
+                                            aod::pidTPCFullKa, aod::pidTPCFullPr,
+                                            aod::pidTOFFullEl, aod::pidTOFFullMu, aod::pidTOFFullPi,
+                                            aod::pidTOFFullKa, aod::pidTOFFullPr, aod::pidTOFbeta,
+                                            aod::BarrelTrackCuts, aod::McTrackLabels>;
 // using MyMCTrackAOD = soa::Join<aod::McParticles, aod::SmearedTracks>;
 
 constexpr static uint32_t gkEventFillMapAOD = VarManager::ObjTypes::Collision;
@@ -618,8 +618,8 @@ struct AnalysisSameEventPairing {
   }
 
   void processDecayToEEAOD(soa::Filtered<MyEventsSelectedAOD>::iterator const& event,
-                                 soa::Filtered<MyBarrelTracksSelectedAOD> const& tracks,
-                                 aod::McParticles const& tracksMC)
+                           soa::Filtered<MyBarrelTracksSelectedAOD> const& tracks,
+                           aod::McParticles const& tracksMC)
   {
     // Reset the fValues array
     VarManager::ResetValues(0, VarManager::kNVars);
