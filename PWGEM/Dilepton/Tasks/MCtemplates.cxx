@@ -333,8 +333,8 @@ struct AnalysisTrackSelection {
             fHistMan->FillHistClass(fHistNamesMCMatched[j][i].Data(), VarManager::fgValues);
           }
         } // end loop over cuts
-      } // end loop over MC signals
-    } // end loop over tracks
+      }   // end loop over MC signals
+    }     // end loop over tracks
   }
 
   template <typename TTracksMC>
@@ -479,8 +479,8 @@ struct AnalysisSameEventPairing {
           }
           fBarrelHistNamesMCmatched.emplace_back(mcSigClasses);
         } // end loop over cuts
-      } // end if(cutNames.IsNull())
-    } // end if processBarrel
+      }   // end if(cutNames.IsNull())
+    }     // end if processBarrel
 
     // Add histogram classes for each specified MCsignal at the generator level
     // TODO: create a std::vector of hist classes to be used at Fill time, to avoid using Form in the process function
@@ -575,7 +575,7 @@ struct AnalysisSameEventPairing {
         }
       }
     } // end loop over barrel track pairs
-  } // end runPairing
+  }   // end runPairing
 
   template <typename TTracksMC>
   void runMCGenPair(TTracksMC const& groupedMCTracks)
@@ -607,7 +607,7 @@ struct AnalysisSameEventPairing {
         }
       }
     } // end of true pairing loop
-  } // end runMCGen
+  }   // end runMCGen
 
   // skimmed
   PresliceUnsorted<ReducedMCTracks> perReducedMcEvent = aod::reducedtrackMC::reducedMCeventId;
