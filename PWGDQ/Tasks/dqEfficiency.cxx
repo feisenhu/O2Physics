@@ -836,7 +836,7 @@ struct AnalysisSameEventPairing {
     } // end loop over barrel track pairs
   }   // end runPairing
 
-  template <int TPairType,typename TTracksMC>
+  template <int TPairType, typename TTracksMC>
   void runMCGen(TTracksMC& groupedMCTracks)
   {
     // loop over mc stack and fill histograms for pure MC truth signals
