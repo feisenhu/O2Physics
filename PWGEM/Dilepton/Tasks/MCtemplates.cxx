@@ -628,7 +628,8 @@ struct AnalysisSameEventPairing {
     runPairing<VarManager::kDecayToEE, gkTrackFillMap>(tracks, tracks);
     auto groupedMCTracks = tracksMC.sliceBy(perReducedMcEvent, event.reducedMCevent().globalIndex());
     groupedMCTracks.bindInternalIndicesTo(&tracksMC);
-    if(fConfigRunMCGenPair) runMCGenPair(groupedMCTracks);
+    if (fConfigRunMCGenPair)
+      runMCGenPair(groupedMCTracks);
   }
 
   void processDecayToEESkimmedWithCov(soa::Filtered<MyEventsVtxCovSelected>::iterator const& event,
@@ -643,7 +644,8 @@ struct AnalysisSameEventPairing {
     runPairing<VarManager::kDecayToEE, gkTrackFillMapWithCov>(tracks, tracks);
     auto groupedMCTracks = tracksMC.sliceBy(perReducedMcEvent, event.reducedMCevent().globalIndex());
     groupedMCTracks.bindInternalIndicesTo(&tracksMC);
-    if(fConfigRunMCGenPair) runMCGenPair(groupedMCTracks);
+    if (fConfigRunMCGenPair)
+      runMCGenPair(groupedMCTracks);
   }
 
   void processDecayToEEAOD(soa::Filtered<MyEventsSelectedAOD>::iterator const& event,
@@ -658,7 +660,8 @@ struct AnalysisSameEventPairing {
     runPairing<VarManager::kDecayToEE, gkTrackFillMapAOD>(tracks, tracks);
     auto groupedMCTracks = tracksMC.sliceBy(perMcCollision, event.mcCollision().globalIndex());
     groupedMCTracks.bindInternalIndicesTo(&tracksMC);
-    if(fConfigRunMCGenPair) runMCGenPair(groupedMCTracks);
+    if (fConfigRunMCGenPair)
+      runMCGenPair(groupedMCTracks);
   }
 
   void processDummy(MyEvents&)
