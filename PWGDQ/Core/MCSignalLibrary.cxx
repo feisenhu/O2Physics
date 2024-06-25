@@ -29,6 +29,13 @@ MCSignal* o2::aod::dqmcsignals::GetMCSignal(const char* name)
     signal->AddProng(prong);                           // add the previously defined prong to the signal
     return signal;
   }
+  if (!nameStr.compare("secondary")) {
+    MCProng prong(1);                              // 1-generation prong
+    prong.SetSourceBit(0, MCProng::kSecondary);    // set source to be ALICE primary particles
+    signal = new MCSignal(1, name, "secondaries"); // define a signal with one prong
+    signal->AddProng(prong);                       // add the previously defined prong to the signal
+    return signal;
+  }
   if (!nameStr.compare("electron")) {
     MCProng prong(1, {11}, {true}, {false}, {0}, {0}, {false});        // define 1-generation prong using the full constructor
     signal = new MCSignal(name, "Inclusive electrons", {prong}, {-1}); // define the signal using the full constructor

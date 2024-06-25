@@ -206,6 +206,12 @@ bool MCSignal::CheckProng(int i, bool checkSources, const T& track)
           sourcesDecision |= (uint64_t(1) << MCProng::kFromBackgroundEvent);
         }
       }
+      // Check kSecondary
+      if (fProngs[i].fSourceBits[j] & (uint64_t(1) << MCProng::kSecondary)) {
+        if ((fProngs[i].fExcludeSource[j] & (uint64_t(1) << MCProng::kSecondary)) != (!currentMCParticle.isPhysicalPrimary())) {
+          sourcesDecision |= (uint64_t(1) << MCProng::kSecondary);
+        }
+      }
       // no source bit is fulfilled
       if (!sourcesDecision) {
         return false;

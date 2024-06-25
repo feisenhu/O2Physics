@@ -433,6 +433,8 @@ void VarManager::SetDefaultVarNames()
   fgVariableUnits[kTrackIsInsideTPCModule] = "";
   fgVariableNames[kTRDsignal] = "TRD dE/dx";
   fgVariableUnits[kTRDsignal] = "";
+  fgVariableNames[kPIDforTracking] = "PID assumption for tracking";
+  fgVariableUnits[kPIDforTracking] = "";
   fgVariableNames[kTOFbeta] = "TOF #beta";
   fgVariableUnits[kTOFbeta] = "";
   fgVariableNames[kTrackLength] = "track length";

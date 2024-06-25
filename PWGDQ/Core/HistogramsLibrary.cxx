@@ -602,6 +602,9 @@ void o2::aod::dqhistograms::DefineHistograms(HistogramManager* hm, const char* h
         hm->AddHistogram(histClass, "nSigmaTPCTOF", "", kNvarsPID, varsPIDnSigma, nSigmaBinLimits);
       }
     }
+    if (subGroupStr.Contains("trackingPID")) {
+      hm->AddHistogram(histClass, "PIDforTracking", "PID assumption for tracking", false, 31, -0.5, 30.5, VarManager::kPIDforTracking);
+    }
     if (subGroupStr.Contains("runbyrun")) {
       hm->AddHistogram(histClass, "TPCncls_run", "Number of cluster in TPC vs RunNumber", false, (VarManager::GetNRuns() > 0 ? VarManager::GetNRuns() : 1), -0.5, -0.5 + VarManager::GetNRuns(), VarManager::kRunIndex,
                        160, -0.5, 159.5, VarManager::kTPCncls, 10, 0., 1., VarManager::kNothing, VarManager::GetRunStr().Data());

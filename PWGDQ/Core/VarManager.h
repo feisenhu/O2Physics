@@ -428,6 +428,7 @@ class VarManager : public TObject
     kTRDsignal,
     kTRDPattern,
     kTOFbeta,
+    kPIDforTracking,
     kTrackLength,
     kTrackDCAxy,
     kTrackDCAz,
@@ -1839,6 +1840,8 @@ void VarManager::FillTrack(T const& track, float* values)
     values[kTrackLength] = track.length();
     values[kTPCnclsCR] = track.tpcNClsCrossedRows();
     values[kTRDPattern] = track.trdPattern();
+
+    values[kPIDforTracking] = track.pidForTracking();
 
     values[kTPCsignal] = track.tpcSignal();
     values[kTRDsignal] = track.trdSignal();
