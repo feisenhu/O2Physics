@@ -98,12 +98,14 @@ using MyBarrelTracks = soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksDCA,
                                  aod::pidTPCFullEl, aod::pidTPCFullPi,
                                  aod::pidTPCFullKa, aod::pidTPCFullPr,
                                  aod::pidTOFFullEl, aod::pidTOFFullPi,
-                                 aod::pidTOFFullKa, aod::pidTOFFullPr>;
+                                 aod::pidTOFFullKa, aod::pidTOFFullPr,
+                                 aod::pidTOFbeta>;
 using MyBarrelTracksSelected = soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksDCA,
                                          aod::pidTPCFullEl, aod::pidTPCFullPi,
                                          aod::pidTPCFullKa, aod::pidTPCFullPr,
                                          aod::pidTOFFullEl, aod::pidTOFFullPi,
-                                         aod::pidTOFFullKa, aod::pidTOFFullPr>;
+                                         aod::pidTOFFullKa, aod::pidTOFFullPr,
+                                         aod::pidTOFbeta>;
 using MyBarrelTracksAssocSelected = soa::Join<TrackAssoc, aod::DQBarrelTrackCuts>; // As the kinelatic values must be re-computed for the tracks everytime it is associated to a collision, the selection is done not on the tracks, but on the track-collision association
 
 using MyMuons = soa::Join<aod::FwdTracks, aod::FwdTracksCov, aod::FwdTracksDCA>;
@@ -694,11 +696,14 @@ struct DQFilterPPTask {
     uint32_t pairFilter = 0;
     if (pairingMask > 0) {
       // run pairing on the collision grouped associations
-      for (auto& [a1, a2] : combinations(barrelAssocs, barrelAssocs)) {
+     for (auto& [a1, a2] : combinations(barrelAssocs, barrelAssocs)) {
 
         // get the tracks from the index stored in the association
         auto t1 = a1.template track_as<TTracks>();
         auto t2 = a2.template track_as<TTracks>();
+          ROOT::Math::PtEtaPhiMVector v1(t1.pt(), t1.eta(), t1.phi(), o2::constants::physics::MassElectron);
+          ROOT::Math::PtEtaPhiMVector v2(t2.pt(), t2.eta(), t2.phi(), o2::constants::physics::MassElectron);
+          ROOT::Math::PtEtaPhiMVector v12 = v1 + v2;
 
         // check the pairing mask and that the tracks share a cut bit
         pairFilter = pairingMask & a1.isDQBarrelSelected() & a2.isDQBarrelSelected();
@@ -721,6 +726,12 @@ struct DQFilterPPTask {
           if (!fBarrelPairCuts[icut].IsSelected(VarManager::fgValues)) {
             continue;
           }
+            std::cout << "***" << std::endl;
+            std::cout << "*** Selected BC : " <<bc.globalBC()<< " Selected Collision : " <<collision.globalIndex() <<"   "<< collision.collisionTime()<<std::endl;
+            std::cout << "***                  Track 1 pt : "<<t1.pt()<<" Track 1 eta : "<<t1.eta()<<" Track 1 phi : "<<t1.phi()<<" Track 1 TPCncls : "<<t1.tpcNClsFound()<<" Track 1 N Sigma E : "<<t1.tpcNSigmaEl()<<" Track 1  N Sigma Pi: "<<t1.tpcNSigmaPi()<<" Track 1 N Sigma El TOF : "<<t1.tofNSigmaEl()<<" Track 1 TOF beta : "<<t1.beta()<<"  Selected 1 : "<<a1.isDQBarrelSelected()<<std::endl;
+            std::cout << "***                  Track 2 pt : "<<t2.pt()<<" Track 2 eta : "<<t2.eta()<<" Track 2 phi : "<<t2.phi()<<" Track 2 TPCncls : "<<t2.tpcNClsFound()<<" Track 2 N Sigma E : "<<t2.tpcNSigmaEl()<<" Track 2  N Sigma Pi: "<<t2.tpcNSigmaPi()<<" Track 2 N Sigma El TOF : "<<t2.tofNSigmaEl()<<" Track 2 TOF beta : "<<t2.beta()<<"  Selected 2 : "<<a2.isDQBarrelSelected()<<std::endl;
+            std::cout << "***                  Pair Mass : "<<v12.M()<<"        Pair Pt : "<<v12.Pt()<<"             Pair Phi : "<<v12.Phi()<<std::endl;
+            
           objCountersBarrel[icut] += 1; // count the pair
           if (fConfigQA) {              // fill histograms if QA is enabled
             fHistMan->FillHistClass(fBarrelPairHistNames[icut].Data(), VarManager::fgValues);
@@ -830,7 +841,7 @@ struct DQFilterPPTask {
     fFiltersMap.clear();
     fCEFPfilters.clear();
 
-    cout << "------------------- filterPP, n assocs barrel/muon :: " << trackAssocs.size() << " / " << muonAssocs.size() << endl;
+    // cout << "------------------- filterPP, n assocs barrel/muon :: " << trackAssocs.size() << " / " << muonAssocs.size() << endl;
 
     uint64_t barrelMask = 0;
     for (int i = 0; i < fNBarrelCuts; i++) {
@@ -843,7 +854,7 @@ struct DQFilterPPTask {
 
     // Loop over collisions
     // int event = 0;
-    int eventsFired = 0;
+    // int eventsFired = 0;
     for (const auto& collision : collisions) {
       // skip those that do not pass our selection
       if (!collision.isDQEventSelected()) {
@@ -863,7 +874,7 @@ struct DQFilterPPTask {
         // event++;
         continue;
       }
-      eventsFired++;
+      // eventsFired++;
       // compute the CEPF decisions (this is done in a spacial setup with exactly kNTriggersDQ configured triggers)
       std::vector<bool> decisions(kNTriggersDQ, false); // event decisions to be transmitted to CEFP
       for (int i = 0; i < fNBarrelCuts; i++) {
@@ -956,7 +967,7 @@ struct DQFilterPPTask {
     //       start with all configured barrel selections and then continue with those from muons
     //       The configured order has to be in sync with that implemented in the cefp task and can be done
     //       by preparing a dedicated json configuration file
-    int totalEventsTriggered = 0;
+    // int totalEventsTriggered = 0;
     for (const auto& collision : collisions) {
       fStats->Fill(-2.0);
       if (!collision.isDQEventSelected()) {
@@ -970,7 +981,7 @@ struct DQFilterPPTask {
         eventFilter(0);
         dqtable(false, false, false, false, false, false, false);
       } else {
-        totalEventsTriggered++;
+        // totalEventsTriggered++;
         for (int i = 0; i < fNBarrelCuts + fNMuonCuts; i++) {
           if (fFiltersMap[collision.globalIndex()] & (uint32_t(1) << i))
             fStats->Fill(static_cast<float>(i));
@@ -981,7 +992,7 @@ struct DQFilterPPTask {
       }
     }
 
-    cout << "-------------------- In this TF, eventsFired / totalTriggered :: " << eventsFired << "/" << totalEventsTriggered << endl;
+    // cout << "-------------------- In this TF, eventsFired / totalTriggered :: " << eventsFired << "/" << totalEventsTriggered << endl;
   }
 
   // TODO: dummy function for the case when no process function is enabled
