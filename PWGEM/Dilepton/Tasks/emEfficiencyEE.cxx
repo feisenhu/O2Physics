@@ -1100,7 +1100,8 @@ struct AnalysisTrackSelection {
           printf("Has reccollision but is ambiguous\n");
         // printf("Look for the reconstructed collision %d\n",reccollisionid);
         for (auto& event : events) {
-          if (event.isEventSelected() == 1) VarManager::FillEvent<TEventFillMap>(event);
+          if (event.isEventSelected() == 1)
+            VarManager::FillEvent<TEventFillMap>(event);
           // printf("Global index of collision %d\n",event.globalIndex());
           if ((reccollisionid == event.globalIndex()) && (event.isEventSelected() == 1)) {
             // printf("Found a collision with the same id %d and %d\n",reccollisionid,event.globalIndex());
