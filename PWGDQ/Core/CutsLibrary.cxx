@@ -1609,7 +1609,7 @@ AnalysisCompositeCut* o2::aod::dqcuts::GetCompositeCut(const char* cutName)
       }
 
       if (!nameStr.compare(Form("lmee%s_eNSigmaRun3%s_Resol", vecTypetrackWithPID.at(jcase).Data(), vecPIDcase.at(icase).Data()))) {
-        cut->AddCut(GetAnalysisCut("openEtaSel")); // No pt cut and wider eta cut to produce resolution maps  
+        cut->AddCut(GetAnalysisCut("openEtaSel")); // No pt cut and wider eta cut to produce resolution maps
         cut->AddCut(GetAnalysisCut(Form("lmeeQCTrackCuts%s", vecTypetrackWithPID.at(jcase).Data())));
         cut->AddCut(GetAnalysisCut("PrimaryTrack_looseDCA"));
 
