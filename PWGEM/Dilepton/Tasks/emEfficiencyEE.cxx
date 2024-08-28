@@ -171,7 +171,7 @@ struct AnalysisEventSelection {
         subGeneratorID = event.mcCollision().getSubGeneratorId();
       }
     }
-    
+
     registry.fill(HIST("Generator/SubGenerator_BeforeCuts"), subGeneratorID);
 
     // check if SubGeneratorID is part of list:
@@ -827,7 +827,7 @@ struct AnalysisTrackSelection {
             if constexpr (smeared)
               fHistGenSmearedPosPart[isig]->Fill(mctrack.ptSmeared(), mctrack.etaSmeared(), mctrack.phiSmeared());
           }
-          if (fConfigQA){
+          if (fConfigQA) {
             fHistManQA->FillHistClass(fHistNamesMCQA[isig].Data(), VarManager::fgValues);
           }
         }
@@ -1094,7 +1094,8 @@ struct AnalysisTrackSelection {
             }
           }
         }
-        if (!pass) continue; // rec collision of track is not selected by isSelected
+        if (!pass)
+          continue; // rec collision of track is not selected by isSelected
         // else                 rec collision of track is selected by isSelected
       } else {
         // printf("Not attached to a reconstructed collision\n");
@@ -1169,10 +1170,10 @@ struct AnalysisTrackSelection {
       //     continue;
       //   }
 
-        // no track cuts
-        if (!(fRecTrackLabels[fTrackCuts.size()].find(mctrackindex) != fRecTrackLabels[fTrackCuts.size()].end())) {
-          fRecTrackLabels[fTrackCuts.size()][mctrackindex] = fRecCounters[fTrackCuts.size()];
-          fRecCounters[fTrackCuts.size()]++;
+      // no track cuts
+      if (!(fRecTrackLabels[fTrackCuts.size()].find(mctrackindex) != fRecTrackLabels[fTrackCuts.size()].end())) {
+        fRecTrackLabels[fTrackCuts.size()][mctrackindex] = fRecCounters[fTrackCuts.size()];
+        fRecCounters[fTrackCuts.size()]++;
         } else {
           // printf("For cut %d, found a mc collision track already reconstructed %d for selected collision with the same mc collision %d\n",j,mctrackindex,mcCollisionId);
           doublereconstructedtrack[fTrackCuts.size()] = 1;
@@ -1192,88 +1193,88 @@ struct AnalysisTrackSelection {
             }
           }
         }
-      // }
+        // }
 
-      // fill histograms
-      for (unsigned int i = 0; i < fMCSignals.size(); i++) {
-        if (!(mcDecision & (uint32_t(1) << i))) {
-          continue;
-        }
-        Double_t mmcpt = -10000.;
-        Double_t mmceta = -10000.;
-        Double_t mmcphi = -1000.;
-        // No track cut
-        if (fConfigRecWithMC) {
-          if constexpr ((TTrackFillMap & VarManager::ObjTypes::ReducedTrack) > 0) {
-            auto mctrack = track.reducedMCTrack();
-            mmcpt = mctrack.pt();
-            mmceta = mctrack.eta();
-            mmcphi = mctrack.phi();
+        // fill histograms
+        for (unsigned int i = 0; i < fMCSignals.size(); i++) {
+          if (!(mcDecision & (uint32_t(1) << i))) {
+            continue;
           }
-          if constexpr ((TTrackFillMap & VarManager::ObjTypes::Track) > 0) {
-            if (track.has_mcParticle()) {
-              auto mctrack = track.template mcParticle_as<aod::McParticles>();
+          Double_t mmcpt = -10000.;
+          Double_t mmceta = -10000.;
+          Double_t mmcphi = -1000.;
+          // No track cut
+          if (fConfigRecWithMC) {
+            if constexpr ((TTrackFillMap & VarManager::ObjTypes::ReducedTrack) > 0) {
+              auto mctrack = track.reducedMCTrack();
               mmcpt = mctrack.pt();
               mmceta = mctrack.eta();
               mmcphi = mctrack.phi();
             }
-          }
-
-          if ((mccollisionwithin10 && fConfigMCCollz) || (!fConfigMCCollz)) {
-            if (track.sign() < 0) {
-              fHistRecNegPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-              if (doublereconstructedtrack[fTrackCuts.size()] == 0)
-                fHistRecNegSingleRecPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-              if (TMath::Abs(mmceta) < 0.8) {
-                fHistRecNegClassCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
-                fHistRecNegClassAmbigCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
-              }
-            } else {
-              fHistRecPosPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-              if (doublereconstructedtrack[fTrackCuts.size()] == 0)
-                fHistRecPosSingleRecPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-              if (TMath::Abs(mmceta) < 0.8) {
-                fHistRecPosClassCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
-                fHistRecPosClassAmbigCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
+            if constexpr ((TTrackFillMap & VarManager::ObjTypes::Track) > 0) {
+              if (track.has_mcParticle()) {
+                auto mctrack = track.template mcParticle_as<aod::McParticles>();
+                mmcpt = mctrack.pt();
+                mmceta = mctrack.eta();
+                mmcphi = mctrack.phi();
               }
             }
-          }
-        }
-        // track cuts
-        for (unsigned int j = 0; j < fTrackCuts.size(); j++) {
-          if (filterMap & (uint8_t(1) << j)) {
-            if (track.sign() < 0) {
-              fHistRecNegPart[j * fMCSignals.size() + i]->Fill(track.pt(), track.eta(), track.phi());
-            } else {
-              fHistRecPosPart[j * fMCSignals.size() + i]->Fill(track.pt(), track.eta(), track.phi());
-            }
 
-            if (fConfigRecWithMC) {
-              if ((mccollisionwithin10 && fConfigMCCollz) || (!fConfigMCCollz)) {
-                if (track.sign() < 0) {
-                  fHistRecNegPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-                  if (doublereconstructedtrack[j] == 0)
-                    fHistRecNegSingleRecPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-                  if (TMath::Abs(mmceta) < 0.8) {
-                    fHistRecNegClassCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[j]);
-                    fHistRecNegClassAmbigCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
-                  }
-                } else {
-                  fHistRecPosPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-                  if (doublereconstructedtrack[j] == 0)
-                    fHistRecPosSingleRecPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
-                  if (TMath::Abs(mmceta) < 0.8) {
-                    fHistRecPosClassCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[j]);
-                    fHistRecPosClassAmbigCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
-                  }
+            if ((mccollisionwithin10 && fConfigMCCollz) || (!fConfigMCCollz)) {
+              if (track.sign() < 0) {
+                fHistRecNegPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                if (doublereconstructedtrack[fTrackCuts.size()] == 0)
+                  fHistRecNegSingleRecPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                if (TMath::Abs(mmceta) < 0.8) {
+                  fHistRecNegClassCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
+                  fHistRecNegClassAmbigCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
+                }
+              } else {
+                fHistRecPosPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                if (doublereconstructedtrack[fTrackCuts.size()] == 0)
+                  fHistRecPosSingleRecPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                if (TMath::Abs(mmceta) < 0.8) {
+                  fHistRecPosClassCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
+                  fHistRecPosClassAmbigCollDoubleCountPartMC[fTrackCuts.size() * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
                 }
               }
             }
-
-            if (fConfigQA)
-              fHistManQA->FillHistClass(fHistNamesMCMatchedQA[j][i].Data(), VarManager::fgValues);
           }
-        } // end loop over cuts
+          // track cuts
+          for (unsigned int j = 0; j < fTrackCuts.size(); j++) {
+            if (filterMap & (uint8_t(1) << j)) {
+              if (track.sign() < 0) {
+                fHistRecNegPart[j * fMCSignals.size() + i]->Fill(track.pt(), track.eta(), track.phi());
+              } else {
+                fHistRecPosPart[j * fMCSignals.size() + i]->Fill(track.pt(), track.eta(), track.phi());
+              }
+
+              if (fConfigRecWithMC) {
+                if ((mccollisionwithin10 && fConfigMCCollz) || (!fConfigMCCollz)) {
+                  if (track.sign() < 0) {
+                    fHistRecNegPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                    if (doublereconstructedtrack[j] == 0)
+                      fHistRecNegSingleRecPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                    if (TMath::Abs(mmceta) < 0.8) {
+                      fHistRecNegClassCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[j]);
+                      fHistRecNegClassAmbigCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
+                    }
+                  } else {
+                    fHistRecPosPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                    if (doublereconstructedtrack[j] == 0)
+                      fHistRecPosSingleRecPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, mmceta, mmcphi);
+                    if (TMath::Abs(mmceta) < 0.8) {
+                      fHistRecPosClassCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(mmcpt, collisioninfo, doublereconstructedtrack[j]);
+                      fHistRecPosClassAmbigCollDoubleCountPartMC[j * fMCSignals.size() + i]->Fill(ambiguousinfo, collisioninfo, doublereconstructedtrack[fTrackCuts.size()]);
+                    }
+                  }
+                }
+              }
+
+              if (fConfigQA)
+                fHistManQA->FillHistClass(fHistNamesMCMatchedQA[j][i].Data(), VarManager::fgValues);
+            }
+          } // end loop over cuts
       }   // end loop over MC signals
     }     // end loop over reconstructed track belonging to the events
   }
