@@ -39,11 +39,11 @@ MCSignal::MCSignal(int nProngs, const char* name /*= ""*/, const char* title /*=
 
 //________________________________________________________________________________________________
 MCSignal::MCSignal(const char* name, const char* title, std::vector<MCProng> prongs, std::vector<short> commonAncestors, bool excludeCommonAncestor) : TNamed(name, title),
-                                                                                                                                                        fProngs(prongs),
-                                                                                                                                                        fNProngs(prongs.size()),
-                                                                                                                                                        fCommonAncestorIdxs(commonAncestors),
-                                                                                                                                                        fExcludeCommonAncestor(excludeCommonAncestor),
-                                                                                                                                                        fTempAncestorLabel(-1)
+                                                                                                                                                       fProngs(prongs),
+                                                                                                                                                       fNProngs(prongs.size()),
+                                                                                                                                                       fCommonAncestorIdxs(commonAncestors),
+                                                                                                                                                       fExcludeCommonAncestor(excludeCommonAncestor),
+                                                                                                                                                       fTempAncestorLabel(-1)
 {
 }
 
