@@ -1614,7 +1614,7 @@ struct AnalysisSameEventPairing {
             } else {
               if (sign1 > 0) { // ++ pairs
                 fHistMan->FillHistClass(histNames[icut][1].Data(), VarManager::fgValues);
-                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) {        // loop over MC signals
+                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) { // loop over MC signals
                   if (mcDecision & (uint32_t(1) << isig)) {
                     fHistMan->FillHistClass(histNamesMC[icut][isig * fRecMCSignals.size() + 1].Data(), VarManager::fgValues);
                   }
@@ -1629,7 +1629,7 @@ struct AnalysisSameEventPairing {
                 }
               } else { // -- pairs
                 fHistMan->FillHistClass(histNames[icut][2].Data(), VarManager::fgValues);
-                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) {        // loop over MC signals
+                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) { // loop over MC signals
                   if (mcDecision & (uint32_t(1) << isig)) {
                     fHistMan->FillHistClass(histNamesMC[icut][isig * fRecMCSignals.size() + 2].Data(), VarManager::fgValues);
                   }
