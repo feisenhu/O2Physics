@@ -1205,26 +1205,22 @@ struct AnalysisSameEventPairing {
             if (!sigNamesStr.IsNull()) {
               for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) {
                 auto sig = fRecMCSignals.at(isig);
+                names = {
+                  Form("PairsBarrelSEPM_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
+                  Form("PairsBarrelSEPP_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
+                  Form("PairsBarrelSEMM_%s_%s", objArray->At(icut)->GetName(), sig.GetName())};
                 if (fConfigQA) {
-                  names = {
-                    Form("PairsBarrelSEPM_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPP_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEMM_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPMCorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPMIncorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPM_ambiguousInBunch_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPM_ambiguousInBunchCorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPM_ambiguousInBunchIncorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPM_ambiguousOutOfBunch_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPM_ambiguousOutOfBunchCorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPM_ambiguousOutOfBunchIncorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName())};
-                  histNames += Form("%s;%s;%s;%s;%s;%s;%s;%s;%s;", names[0].Data(), names[1].Data(), names[2].Data(), names[3].Data(), names[4].Data(), names[5].Data(), names[6].Data(), names[7].Data(), names[8].Data(), names[9].Data(), names[10].Data());
-                } else {
-                  names = {
-                    Form("PairsBarrelSEPM_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEPP_%s_%s", objArray->At(icut)->GetName(), sig.GetName()),
-                    Form("PairsBarrelSEMM_%s_%s", objArray->At(icut)->GetName(), sig.GetName())};
-                  histNames += Form("%s;%s;%s;", names[0].Data(), names[1].Data(), names[2].Data());
+                  names.push_back(Form("PairsBarrelSEPMCorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                  names.push_back(Form("PairsBarrelSEPMIncorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                  names.push_back(Form("PairsBarrelSEPM_ambiguousInBunch_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                  names.push_back(Form("PairsBarrelSEPM_ambiguousInBunchCorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                  names.push_back(Form("PairsBarrelSEPM_ambiguousInBunchIncorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                  names.push_back(Form("PairsBarrelSEPM_ambiguousOutOfBunch_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                  names.push_back(Form("PairsBarrelSEPM_ambiguousOutOfBunchCorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                  names.push_back(Form("PairsBarrelSEPM_ambiguousOutOfBunchIncorrectAssoc_%s_%s", objArray->At(icut)->GetName(), sig.GetName()));
+                }
+                for (auto& n : names) {
+                  histNames += Form("%s;", n.Data());
                 }
                 fBarrelHistNamesMCmatched.try_emplace(icut * fRecMCSignals.size() + isig, names);
               } // end loop over MC signals
@@ -1614,9 +1610,9 @@ struct AnalysisSameEventPairing {
             } else {
               if (sign1 > 0) { // ++ pairs
                 fHistMan->FillHistClass(histNames[icut][1].Data(), VarManager::fgValues);
-                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) { // loop over MC signals
+                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) {        // loop over MC signals
                   if (mcDecision & (uint32_t(1) << isig)) {
-                    fHistMan->FillHistClass(histNamesMC[icut][isig * fRecMCSignals.size() + 1].Data(), VarManager::fgValues);
+                    fHistMan->FillHistClass(histNamesMC[icut * fRecMCSignals.size() + isig][1].Data(), VarManager::fgValues);
                   }
                 }
                 if (fConfigQA) {
@@ -1629,9 +1625,9 @@ struct AnalysisSameEventPairing {
                 }
               } else { // -- pairs
                 fHistMan->FillHistClass(histNames[icut][2].Data(), VarManager::fgValues);
-                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) { // loop over MC signals
+                for (unsigned int isig = 0; isig < fRecMCSignals.size(); isig++) {        // loop over MC signals
                   if (mcDecision & (uint32_t(1) << isig)) {
-                    fHistMan->FillHistClass(histNamesMC[icut][isig * fRecMCSignals.size() + 2].Data(), VarManager::fgValues);
+                    fHistMan->FillHistClass(histNamesMC[icut * fRecMCSignals.size() + isig][2].Data(), VarManager::fgValues);
                   }
                 }
                 if (fConfigQA) {
