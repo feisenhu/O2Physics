@@ -335,7 +335,7 @@ struct AnalysisTrackSelection {
         } // end loop over cuts
       }   // end loop over MC signals
     }     // end loop over tracks
-  }
+  }       // end runTrackSelection
 
   template <typename TTracksMC>
   void runMCGenTrack(TTracksMC const& groupedMCTracks)
