@@ -445,6 +445,7 @@ class VarManager : public TObject
     kTPCncls,
     kITSClusterMap,
     kTPCnclsCR,
+    kTPCnCRoverFindCls,
     kTPCchi2,
     kTPCsignal,
     kTPCsignalRandomized,
@@ -2033,6 +2034,7 @@ void VarManager::FillTrack(T const& track, float* values)
     values[kTPCchi2] = track.tpcChi2NCl();
     values[kTrackLength] = track.length();
     values[kTPCnclsCR] = track.tpcNClsCrossedRows();
+    values[kTPCnCRoverFindCls] = track.tpcCrossedRowsOverFindableCls();
     values[kTRDPattern] = track.trdPattern();
 
     values[kTPCsignal] = track.tpcSignal();
