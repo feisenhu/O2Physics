@@ -2512,7 +2512,7 @@ AnalysisCompositeCut* o2::aod::dqcuts::GetCompositeCut(const char* cutName)
     return cut;
   }
 
-  if (!nameStr.compare("trackCut_compareDQEMframework")) { //cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
+  if (!nameStr.compare("trackCut_compareDQEMframework")) { // cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
     cut->AddCut(GetAnalysisCut("lmeeStandardKine"));
     cut->AddCut(GetAnalysisCut("trackQuality_compareDQEMframework"));
     cut->AddCut(GetAnalysisCut("trackDCA1cm"));
@@ -3817,7 +3817,7 @@ AnalysisCut* o2::aod::dqcuts::GetAnalysisCut(const char* cutName)
     return cut;
   }
 
-  if (!nameStr.compare("trackQuality_compareDQEMframework")) { //cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
+  if (!nameStr.compare("trackQuality_compareDQEMframework")) { // cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
     cut->AddCut(VarManager::kIsSPDfirst, 0.5, 1.5);
     cut->AddCut(VarManager::kITSchi2, 0.0, 5.0);
     cut->AddCut(VarManager::kITSncls, 4.5, 7.5);
@@ -4076,7 +4076,7 @@ AnalysisCut* o2::aod::dqcuts::GetAnalysisCut(const char* cutName)
     return cut;
   }
 
-  if (!nameStr.compare("trackDCA1cm")) { //cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
+  if (!nameStr.compare("trackDCA1cm")) { // cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
     cut->AddCut(VarManager::kTrackDCAxy, -1.0, 1.0);
     cut->AddCut(VarManager::kTrackDCAz, -1.0, 1.0);
     return cut;
@@ -4442,7 +4442,7 @@ AnalysisCut* o2::aod::dqcuts::GetAnalysisCut(const char* cutName)
     return cut;
   }
 
-  if (!nameStr.compare("lmee_commonDQEM_PID_TPC")) { //cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
+  if (!nameStr.compare("lmee_commonDQEM_PID_TPC")) { // cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
     cut->AddCut(VarManager::kTPCnSigmaEl, -2.5, 3., false, VarManager::kPin, 0.0, 1e+10, false);
     cut->AddCut(VarManager::kTPCnSigmaPi, -1e12, 3.5, true, VarManager::kPin, 0.0, 1e+10, false);
     cut->AddCut(VarManager::kTPCnSigmaKa, -3., 3., true, VarManager::kPin, 0.0, 1e+10, false);
@@ -4450,7 +4450,7 @@ AnalysisCut* o2::aod::dqcuts::GetAnalysisCut(const char* cutName)
     return cut;
   }
 
-  if (!nameStr.compare("lmee_commonDQEM_PID_TOF")) { //cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
+  if (!nameStr.compare("lmee_commonDQEM_PID_TOF")) { // cut setting to check least common factor between reduced data sets of PWGEM and PWGDQ
     cut->AddCut(VarManager::kTPCnSigmaEl, -2.5, 3., false, VarManager::kPin, 0.0, 1e+10, false);
     cut->AddCut(VarManager::kTPCnSigmaPi, -3., 3.5, true, VarManager::kPin, 0.0, 1e+10, false);
     cut->AddCut(VarManager::kTOFnSigmaEl, -3., 3., false, VarManager::kPin, 0.3, 1e+10, false);
