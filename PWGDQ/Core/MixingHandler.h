@@ -17,12 +17,15 @@
 #ifndef PWGDQ_CORE_MIXINGHANDLER_H_
 #define PWGDQ_CORE_MIXINGHANDLER_H_
 
+#include "PWGDQ/Core/HistogramManager.h"
 #include "PWGDQ/Core/VarManager.h"
 
 #include <TArrayF.h>
+#include <TArrayI.h>
+#include <TClonesArray.h>
+#include <TList.h>
 #include <TNamed.h>
-
-#include <Rtypes.h>
+#include <TString.h>
 
 #include <vector>
 

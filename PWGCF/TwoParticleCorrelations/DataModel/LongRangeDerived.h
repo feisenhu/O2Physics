@@ -34,16 +34,16 @@ DECLARE_SOA_COLUMN(TotalFV0AmplitudeA, totalFV0AmplitudeA, float); //! sum of am
 DECLARE_SOA_COLUMN(GapSide, gapSide, uint8_t);                     // 0 for side A, 1 for side C, 2 for both sides
 } // namespace lrcorrcolltable
 
-DECLARE_SOA_TABLE(LRCollisions, "AOD", "LRCOLLISION",
+DECLARE_SOA_TABLE(CollLRTables, "AOD", "COLLLRTABLE",
                   o2::soa::Index<>,
                   bc::RunNumber,
                   lrcorrcolltable::Zvtx,
                   lrcorrcolltable::Multiplicity,
                   lrcorrcolltable::Centrality,
                   timestamp::Timestamp);
-using LRCollision = LRCollisions::iterator;
+using CollLRTable = CollLRTables::iterator;
 
-DECLARE_SOA_TABLE(UpcLRCollisions, "AOD", "UPCLRCOLLISION",
+DECLARE_SOA_TABLE(UpcCollLRTables, "AOD", "UPCCOLLLRTABLE",
                   o2::soa::Index<>,
                   bc::GlobalBC,
                   bc::RunNumber,
@@ -52,30 +52,30 @@ DECLARE_SOA_TABLE(UpcLRCollisions, "AOD", "UPCLRCOLLISION",
                   lrcorrcolltable::TotalFT0AmplitudeA,
                   lrcorrcolltable::TotalFT0AmplitudeC,
                   lrcorrcolltable::TotalFV0AmplitudeA);
-using UpcLRCollision = UpcLRCollisions::iterator;
+using UpcCollLRTable = UpcCollLRTables::iterator;
 
-DECLARE_SOA_TABLE(UpcSgLRCollisions, "AOD", "UPCSGLRCOLLISION",
+DECLARE_SOA_TABLE(UpcSgCollLRTables, "AOD", "UPCSGCOLLLRTABLE",
                   lrcorrcolltable::GapSide);
-using UpcSgLRCollision = UpcSgLRCollisions::iterator;
+using UpcSgCollLRTable = UpcSgCollLRTables::iterator;
 
 namespace lrcorrzdctable
 {
-DECLARE_SOA_INDEX_COLUMN(UpcLRCollision, upcLRCollision);
+DECLARE_SOA_INDEX_COLUMN(UpcCollLRTable, upcCollLRTable);
 DECLARE_SOA_COLUMN(EnergyCommonZNA, energyCommonZNA, float);
 DECLARE_SOA_COLUMN(EnergyCommonZNC, energyCommonZNC, float);
 } // namespace lrcorrzdctable
 
-DECLARE_SOA_TABLE(LRZdcs, "AOD", "LRZDC",
+DECLARE_SOA_TABLE(ZdcLRTables, "AOD", "ZDCLRTABLE",
                   o2::soa::Index<>,
-                  lrcorrzdctable::UpcLRCollisionId,
+                  lrcorrzdctable::UpcCollLRTableId,
                   lrcorrzdctable::EnergyCommonZNA,
                   lrcorrzdctable::EnergyCommonZNC);
-using LRZdc = LRZdcs::iterator;
+using ZdcLRTable = ZdcLRTables::iterator;
 
 namespace lrcorrtrktable
 {
-DECLARE_SOA_INDEX_COLUMN(LRCollision, lrCollision);
-DECLARE_SOA_INDEX_COLUMN(UpcLRCollision, upcLRCollision);
+DECLARE_SOA_INDEX_COLUMN(CollLRTable, collLRTable);
+DECLARE_SOA_INDEX_COLUMN(UpcCollLRTable, upcCollLRTable);
 DECLARE_SOA_COLUMN(Pt, pt, float);
 DECLARE_SOA_COLUMN(Eta, eta, float);
 DECLARE_SOA_COLUMN(Phi, phi, float);
@@ -99,36 +99,36 @@ enum V0TrackPid {
 };
 } // namespace lrcorrtrktable
 
-DECLARE_SOA_TABLE(LRMidTracks, "AOD", "LRMIDTRACK",
+DECLARE_SOA_TABLE(TrkLRTables, "AOD", "TRKLRTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::LRCollisionId,
+                  lrcorrtrktable::CollLRTableId,
                   lrcorrtrktable::Pt,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi,
                   lrcorrtrktable::TrackType);
-using LRMidTrack = LRMidTracks::iterator;
+using TrkLRTable = TrkLRTables::iterator;
 
-DECLARE_SOA_TABLE(LRFt0aTracks, "AOD", "LRFT0ATRACK",
+DECLARE_SOA_TABLE(Ft0aLRTables, "AOD", "FT0ALRTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::LRCollisionId,
+                  lrcorrtrktable::CollLRTableId,
                   lrcorrtrktable::ChannelID,
                   lrcorrtrktable::Amplitude,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using LRFt0aTrack = LRFt0aTracks::iterator;
+using Ft0aLRTable = Ft0aLRTables::iterator;
 
-DECLARE_SOA_TABLE(LRFt0cTracks, "AOD", "LRFT0CTRACK",
+DECLARE_SOA_TABLE(Ft0cLRTables, "AOD", "FT0CLRTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::LRCollisionId,
+                  lrcorrtrktable::CollLRTableId,
                   lrcorrtrktable::ChannelID,
                   lrcorrtrktable::Amplitude,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using LRFt0cTrack = LRFt0cTracks::iterator;
+using Ft0cLRTable = Ft0cLRTables::iterator;
 
-DECLARE_SOA_TABLE(LRV0Tracks, "AOD", "LRV0TRACK",
+DECLARE_SOA_TABLE(V0TrkLRTables, "AOD", "V0TRKLRTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::LRCollisionId,
+                  lrcorrtrktable::CollLRTableId,
                   lrcorrtrktable::IdPos,
                   lrcorrtrktable::IdNeg,
                   lrcorrtrktable::Pt,
@@ -136,54 +136,54 @@ DECLARE_SOA_TABLE(LRV0Tracks, "AOD", "LRV0TRACK",
                   lrcorrtrktable::Phi,
                   lrcorrtrktable::InvMass,
                   lrcorrtrktable::V0Type);
-using LRV0Track = LRV0Tracks::iterator;
+using V0TrkLRTable = V0TrkLRTables::iterator;
 
-DECLARE_SOA_TABLE(LRMftTracks, "AOD", "LRMFTTRACK",
+DECLARE_SOA_TABLE(MftTrkLRTables, "AOD", "MFTTRKLRTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::LRCollisionId,
+                  lrcorrtrktable::CollLRTableId,
                   lrcorrtrktable::Pt,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using LRMftTrack = LRMftTracks::iterator;
+using MftTrkLRTable = MftTrkLRTables::iterator;
 
-DECLARE_SOA_TABLE(LRMftBestTracks, "AOD", "LRMFTBESTTRACK",
+DECLARE_SOA_TABLE(MftBestTrkLRTables, "AOD", "MFTBESTTRKLRTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::LRCollisionId,
+                  lrcorrtrktable::CollLRTableId,
                   lrcorrtrktable::Pt,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using LRMftBestTrack = LRMftBestTracks::iterator;
+using MftBestTrkLRTable = MftBestTrkLRTables::iterator;
 
-DECLARE_SOA_TABLE(UpcLRMidTracks, "AOD", "UPCLRMIDTRACK",
+DECLARE_SOA_TABLE(TrkLRUpcTables, "AOD", "TRKLRUPCTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::UpcLRCollisionId,
+                  lrcorrtrktable::UpcCollLRTableId,
                   lrcorrtrktable::Pt,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi,
                   lrcorrtrktable::TrackType);
-using UpcLRMidTrack = UpcLRMidTracks::iterator;
+using TrkLRUpcTable = TrkLRUpcTables::iterator;
 
-DECLARE_SOA_TABLE(UpcLRFt0aTracks, "AOD", "UPCLRFT0ATRACK",
+DECLARE_SOA_TABLE(Ft0aLRUpcTables, "AOD", "FT0ALRUpcTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::UpcLRCollisionId,
+                  lrcorrtrktable::UpcCollLRTableId,
                   lrcorrtrktable::ChannelID,
                   lrcorrtrktable::Amplitude,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using UpcLRFt0aTrack = UpcLRFt0aTracks::iterator;
+using Ft0aLRUpcTable = Ft0aLRUpcTables::iterator;
 
-DECLARE_SOA_TABLE(UpcLRFt0cTracks, "AOD", "UPCLRFT0CTRACK",
+DECLARE_SOA_TABLE(Ft0cLRUpcTables, "AOD", "FT0CLRUpcTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::UpcLRCollisionId,
+                  lrcorrtrktable::UpcCollLRTableId,
                   lrcorrtrktable::ChannelID,
                   lrcorrtrktable::Amplitude,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using UpcLRFt0cTrack = UpcLRFt0cTracks::iterator;
+using Ft0cLRUpcTable = Ft0cLRUpcTables::iterator;
 
-DECLARE_SOA_TABLE(UpcLRV0Tracks, "AOD", "UPCLRV0TRACK",
+DECLARE_SOA_TABLE(V0TrkLRUpcTables, "AOD", "V0TRKLRUPCTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::UpcLRCollisionId,
+                  lrcorrtrktable::UpcCollLRTableId,
                   lrcorrtrktable::IdPos,
                   lrcorrtrktable::IdNeg,
                   lrcorrtrktable::Pt,
@@ -191,23 +191,23 @@ DECLARE_SOA_TABLE(UpcLRV0Tracks, "AOD", "UPCLRV0TRACK",
                   lrcorrtrktable::Phi,
                   lrcorrtrktable::InvMass,
                   lrcorrtrktable::V0Type);
-using UpcLRV0Track = UpcLRV0Tracks::iterator;
+using V0TrkLRUpcTable = V0TrkLRUpcTables::iterator;
 
-DECLARE_SOA_TABLE(UpcLRMftTracks, "AOD", "UPCLRMFTTRACK",
+DECLARE_SOA_TABLE(MftTrkLRUpcTables, "AOD", "MFTTRKLRUPCTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::UpcLRCollisionId,
+                  lrcorrtrktable::UpcCollLRTableId,
                   lrcorrtrktable::Pt,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using UpcLRMftTrack = UpcLRMftTracks::iterator;
+using MftTrkLRUpcTable = MftTrkLRUpcTables::iterator;
 
-DECLARE_SOA_TABLE(UpcLRMftBestTracks, "AOD", "UPCLRMFTBESTTRACK",
+DECLARE_SOA_TABLE(MftBestTrkLRUpcTables, "AOD", "MFTBESTTRKLRUPCTABLE",
                   o2::soa::Index<>,
-                  lrcorrtrktable::UpcLRCollisionId,
+                  lrcorrtrktable::UpcCollLRTableId,
                   lrcorrtrktable::Pt,
                   lrcorrtrktable::Eta,
                   lrcorrtrktable::Phi);
-using UpcLRMftBestTrack = UpcLRMftBestTracks::iterator;
+using MftBestTrkLRUpcTable = MftBestTrkLRUpcTables::iterator;
 
 } // namespace o2::aod
 

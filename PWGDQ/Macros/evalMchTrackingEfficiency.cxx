@@ -14,20 +14,17 @@
 ///
 /// \author Zaida Conesa del Valle <zaida.conesa.del.valle@cern.ch>
 /// \author Andrea Tavira García <tavira-garcia@ijclab.in2p3.fr>
-#include <TAxis.h>
-#include <TCanvas.h>
-#include <TDirectoryFile.h>
-#include <TFile.h>
-#include <TH1.h>
-#include <TH2.h>
-#include <THn.h>
-#include <TLegend.h>
-#include <TString.h>
-#include <TStyle.h>
-
-#include <Rtypes.h>
-
 #include <vector>
+
+#include "TFile.h"
+#include "TDirectoryFile.h"
+#include "THn.h"
+#include "TH1F.h"
+#include "TH2F.h"
+#include "TAxis.h"
+#include "TCanvas.h"
+#include "TStyle.h"
+#include "TLegend.h"
 
 double computeEfficiencyPerChamber(THnF* hnf, int iAxis, int iCh, double binLimits[2]);
 double computeEfficiencyPerChamber(THnF* hnf, const int iAxis[3], int iCh, double binLimits[3][2]);

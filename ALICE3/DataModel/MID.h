@@ -16,12 +16,11 @@
 /// \brief  Set of tables for the ALICE3 MID information
 ///
 
-#ifndef ALICE3_DATAMODEL_MID_H_
-#define ALICE3_DATAMODEL_MID_H_
+#ifndef O2_ANALYSIS_ALICE3_MID_H_
+#define O2_ANALYSIS_ALICE3_MID_H_
 
-#include <Framework/AnalysisDataModel.h>
-
-#include <cstdint>
+// O2 includes
+#include "Framework/AnalysisDataModel.h"
 
 namespace o2::aod
 {
@@ -42,4 +41,4 @@ using MID = MIDs::iterator;
 
 } // namespace o2::aod
 
-#endif // ALICE3_DATAMODEL_MID_H_
+#endif // O2_ANALYSIS_ALICE3_MID_H_

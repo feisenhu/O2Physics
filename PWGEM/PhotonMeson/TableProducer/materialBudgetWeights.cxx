@@ -17,8 +17,7 @@
 
 #include "PWGEM/PhotonMeson/Core/MaterialBudgetWeights.h"
 
-#include <Framework/AnalysisTask.h>
-#include <Framework/runDataProcessing.h>
+#include "Framework/runDataProcessing.h"
 
 using namespace o2::framework;
 

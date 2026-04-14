@@ -17,21 +17,15 @@
 #include "PWGUD/Core/SGTrackSelector.h"
 #include "PWGUD/DataModel/UDTables.h"
 
-#include <CommonConstants/PhysicsConstants.h>
-#include <Framework/ASoAHelpers.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/O2DatabasePDGPlugin.h>
-#include <Framework/runDataProcessing.h>
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/O2DatabasePDGPlugin.h"
+#include "Framework/runDataProcessing.h"
 
-#include <TLorentzVector.h>
+#include "TLorentzVector.h"
+#include <TString.h>
 
-#include <cstdlib>
-#include <vector>
+#include <iostream>
 using namespace std;
 using namespace o2;
 using namespace o2::aod;

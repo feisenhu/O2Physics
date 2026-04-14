@@ -11,17 +11,14 @@
 
 /// \author Luca Micheletti <luca.micheletti@cern.ch>, CERN
 
-#ifndef PWGDQ_MACROS_FIT_LIBRARY_POL4EXPPDF_H_
-#define PWGDQ_MACROS_FIT_LIBRARY_POL4EXPPDF_H_
+#ifndef POL4EXPPDF
+#define POL4EXPPDF
 
-#include <RooAbsPdf.h>
-#include <RooAbsReal.h>
-#include <RooRealProxy.h>
-#include <TObject.h>
-#include <TString.h>
-
-#include <Rtypes.h>
-#include <RtypesCore.h>
+#include "RooAbsPdf.h"
+#include "RooRealProxy.h"
+#include "RooCategoryProxy.h"
+#include "RooAbsReal.h"
+#include "RooAbsCategory.h"
 
 TString nameParameters[] = {"p0", "p1", "p2", "p3", "p4", "p5", "N_bkg", "N_sig", "mean", "width"};
 
@@ -56,4 +53,4 @@ class Pol4ExpPdf : public RooAbsPdf
   ClassDef(Pol4ExpPdf, 1) // Your description goes here...
 };
 
-#endif // PWGDQ_MACROS_FIT_LIBRARY_POL4EXPPDF_H_
+#endif

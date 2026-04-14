@@ -18,10 +18,6 @@
 
 #include "ALICE3/Core/TOFResoALICE3.h"
 
-#include <PID/ParamBase.h>
-
-#include <cmath>
-
 namespace o2::pid::tof
 {
 

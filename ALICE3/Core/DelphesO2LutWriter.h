@@ -23,13 +23,10 @@
 #include "ALICE3/Core/DelphesO2TrackSmearer.h"
 #include "ALICE3/Core/FastTracker.h"
 
-#include <ReconstructionDataFormats/PID.h>
+#include "ReconstructionDataFormats/PID.h"
 
-#include <TGraph.h>
+#include "TGraph.h"
 
-#include <Rtypes.h>
-
-#include <cstddef>
 #include <string>
 
 namespace o2::fastsim

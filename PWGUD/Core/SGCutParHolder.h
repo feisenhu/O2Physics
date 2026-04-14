@@ -13,7 +13,6 @@
 #define PWGUD_CORE_SGCUTPARHOLDER_H_
 
 #include <Rtypes.h>
-
 #include <vector>
 
 // object to hold customizable cut values

@@ -17,12 +17,9 @@
 
 #include "PWGDQ/Core/AnalysisCompositeCut.h"
 #include "PWGDQ/Core/AnalysisCut.h"
-
-#include <Framework/Array2D.h>
+#include "PWGDQ/Core/VarManager.h"
 
 #include <string>
-#include <utility>
-#include <variant>
 #include <vector>
 
 // ///////////////////////////////////////////////
@@ -100,6 +97,8 @@
 // ///////////////////////////////////////////////
 //           End of Cuts for CEFP               //
 // ///////////////////////////////////////////////
+
+#include "rapidjson/document.h"
 
 namespace o2::aod
 {

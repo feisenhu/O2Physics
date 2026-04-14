@@ -15,12 +15,8 @@
 
 #include "PWGEM/Dilepton/Core/DielectronCut.h"
 
-#include <Framework/Logger.h>
+#include "Framework/Logger.h"
 
-#include <Rtypes.h>
-
-#include <cstdint>
-#include <functional>
 #include <set>
 #include <utility>
 

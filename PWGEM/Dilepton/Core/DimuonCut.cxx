@@ -15,11 +15,8 @@
 
 #include "PWGEM/Dilepton/Core/DimuonCut.h"
 
-#include <Framework/Logger.h>
+#include "Framework/Logger.h"
 
-#include <Rtypes.h>
-
-#include <functional>
 #include <vector>
 
 ClassImp(DimuonCut);

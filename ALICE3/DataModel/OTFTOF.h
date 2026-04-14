@@ -20,10 +20,8 @@
 #ifndef ALICE3_DATAMODEL_OTFTOF_H_
 #define ALICE3_DATAMODEL_OTFTOF_H_
 
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/Logger.h>
-
-#include <cstdlib>
+// O2 includes
+#include "Framework/AnalysisDataModel.h"
 
 namespace o2::aod
 {

@@ -15,12 +15,12 @@
 #ifndef PWGEM_DILEPTON_UTILS_MOMENTUMSMEARER_H_
 #define PWGEM_DILEPTON_UTILS_MOMENTUMSMEARER_H_
 
-#include <CCDB/BasicCCDBManager.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/Logger.h>
-#include <Framework/runDataProcessing.h>
+#include "CCDB/BasicCCDBManager.h"
+#include "Framework/ASoAHelpers.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/Logger.h"
+#include "Framework/runDataProcessing.h"
 
-#include <TAxis.h>
 #include <TFile.h>
 #include <TGrid.h>
 #include <TH1.h>
@@ -28,11 +28,14 @@
 #include <TH3.h>
 #include <THnSparse.h>
 #include <TKey.h>
-#include <TObject.h>
 #include <TString.h>
 
-#include <cstdint>
 #include <vector>
+
+using namespace o2;
+using namespace o2::framework;
+using namespace o2::framework::expressions;
+using namespace o2::soa;
 
 class MomentumSmearer
 {
@@ -573,7 +576,7 @@ class MomentumSmearer
   void setCcdbPathRes(TString ccdbPathRes) { fCcdbPathRes = ccdbPathRes; }
   void setCcdbPathEff(TString ccdbPathEff) { fCcdbPathEff = ccdbPathEff; }
   void setCcdbPathDCA(TString ccdbPathDCA) { fCcdbPathDCA = ccdbPathDCA; }
-  void setCcdb(o2::framework::Service<o2::ccdb::BasicCCDBManager> ccdb)
+  void setCcdb(Service<ccdb::BasicCCDBManager> ccdb)
   {
     fCcdb = ccdb;
     fFromCcdb = true;
@@ -642,7 +645,7 @@ class MomentumSmearer
   std::vector<TH1F*> fVecDCA;
   int64_t fTimestamp;
   bool fFromCcdb = false;
-  o2::framework::Service<o2::ccdb::BasicCCDBManager> fCcdb;
+  Service<ccdb::BasicCCDBManager> fCcdb;
   float fMinPtGen = -1.f;
 };
 

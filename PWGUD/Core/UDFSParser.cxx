@@ -11,17 +11,12 @@
 
 #include "UDFSParser.h"
 
-#include <CommonConstants/LHCConstants.h>
-#include <CommonDataFormat/BunchFilling.h>
-#include <Framework/Logger.h>
+#include "CommonConstants/LHCConstants.h"
+#include "CommonDataFormat/BunchFilling.h"
+#include "Framework/Logger.h"
 
-#include <algorithm>
-#include <cctype>
-#include <fstream>
 #include <string>
 #include <vector>
-
-#include <string.h>
 
 // -----------------------------------------------------------------------------
 UDFSParser::UDFSParser(const char* filename)

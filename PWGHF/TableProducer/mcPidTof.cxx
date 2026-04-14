@@ -65,7 +65,6 @@ using namespace o2::framework;
 using namespace o2::pid;
 using namespace o2::framework::expressions;
 using namespace o2::track;
-using namespace o2::common::core;
 
 o2::common::core::MetadataHelper metadataInfo;
 

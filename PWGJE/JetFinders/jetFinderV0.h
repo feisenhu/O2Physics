@@ -28,6 +28,7 @@
 #include <Framework/HistogramRegistry.h>
 #include <Framework/HistogramSpec.h>
 #include <Framework/InitContext.h>
+#include <Framework/Logger.h>
 #include <Framework/O2DatabasePDGPlugin.h>
 #include <Framework/runDataProcessing.h> // IWYU pragma: export
 
@@ -39,8 +40,6 @@
 
 #include <string>
 #include <vector>
-
-#include <math.h>
 
 template <typename CandidateTableData, typename CandidateTableMCD, typename CandidateTableMCP, typename JetTable, typename ConstituentTable>
 struct JetFinderV0Task {

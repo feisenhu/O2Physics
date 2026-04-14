@@ -24,8 +24,6 @@
 #include "PWGJE/Core/JetFindingUtilities.h"
 #include "PWGJE/DataModel/JetReducedData.h"
 
-#include "Common/Core/RecoDecay.h"
-
 #include <Framework/Logger.h>
 
 #include <TKDTree.h>

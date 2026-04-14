@@ -16,6 +16,7 @@
 /// \author Tiantian Cheng
 
 #include "PWGHF/Core/DecayChannelsLegacy.h"
+#include "PWGHF/DataModel/TrackIndexSkimmingTables.h"
 #include "PWGHF/Utils/utilsTrkCandHf.h"
 #include "PWGLF/DataModel/LFStrangenessTables.h"
 

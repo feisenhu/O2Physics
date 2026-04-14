@@ -18,6 +18,9 @@
 #include "PWGDQ/Core/MCProng.h"
 #include "PWGDQ/Core/MCSignal.h"
 
+#include "rapidjson/document.h"
+
+#include <string>
 #include <vector>
 
 namespace o2::aod

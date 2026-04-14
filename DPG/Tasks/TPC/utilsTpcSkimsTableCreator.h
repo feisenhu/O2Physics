@@ -24,8 +24,6 @@
 
 #include "Common/DataModel/OccupancyTables.h"
 
-#include <Framework/ASoA.h>
-
 #include <TRandom3.h>
 
 #include <cmath>

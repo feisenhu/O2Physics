@@ -14,24 +14,20 @@
 /// \since  04.08.2023
 
 #include "Common/DataModel/EventSelection.h"
+#include "Common/DataModel/FT0Corrected.h"
 #include "Common/DataModel/PIDResponseTOF.h"
 #include "Common/DataModel/PIDResponseTPC.h"
 #include "Common/DataModel/TrackSelectionTables.h"
 
-#include <CommonConstants/LHCConstants.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/InitContext.h>
-#include <Framework/runDataProcessing.h>
+#include "CommonConstants/LHCConstants.h"
+#include "CommonConstants/PhysicsConstants.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/StaticFor.h"
+#include "Framework/runDataProcessing.h"
+#include "ReconstructionDataFormats/BCRange.h"
 
-#include <TH1.h>
-#include <TH2.h>
-
-#include <cstddef>
-#include <cstdint>
+#include "TLorentzVector.h"
 
 using namespace o2;
 using namespace o2::framework;

@@ -14,25 +14,23 @@
 ///
 /// \author Chi ZHANG, CEA-Saclay, chi.zhang@cern.ch
 
-#include "PWGCF/GenericFramework/Core/GFWWeights.h"
-
-#include <CCDB/CcdbApi.h>
-#include <Framework/Logger.h>
-
-#include <TFile.h>
-#include <TString.h>
-
+#include <gsl/span>
 #include <cmath>
-#include <cstdint>
-#include <exception>
-#include <map>
 #include <string>
-#include <utility>
+#include <unordered_map>
+#include <vector>
+#include <iostream>
+
+#include <TSystem.h>
+#include <TFile.h>
+#include "Framework/Logger.h"
+#include "CCDB/BasicCCDBManager.h"
+#include "PWGCF/GenericFramework/Core/GFWWeights.h"
 
 using namespace o2;
 using namespace std;
 
-void dqFlowAccWeights(int64_t tmin = 1546300800000, int64_t tmax = 1577833200000, std::string Period = "LHC23zzh_pass2", std::string SubDir = "d-q-event-qvector", std::string FileName = "AnalysisResults.root")
+void dqFlowAccWeights(int64 tmin = 1546300800000, int64 tmax = 1577833200000, std::string Period = "LHC23zzh_pass2", std::string SubDir = "d-q-event-qvector", std::string FileName = "AnalysisResults.root")
 {
   if (tmax < tmin) {
     LOG(fatal) << "Wrong validity syntax!";

@@ -57,13 +57,12 @@ A few non-existent PYTHIA codes are used to select more than one PYTHIA code.
 #ifndef PWGDQ_CORE_MCPRONG_H_
 #define PWGDQ_CORE_MCPRONG_H_
 
-#include <TString.h>
+#include "TNamed.h"
+#include "TString.h"
 
-#include <Rtypes.h>
-
-#include <cstdint>
-#include <map>
 #include <vector>
+#include <iostream>
+#include <map>
 
 class MCProng
 {

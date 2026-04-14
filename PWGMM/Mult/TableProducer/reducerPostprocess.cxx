@@ -9,14 +9,11 @@
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
 
+#include "Framework/AnalysisTask.h"
+
 #include "ReducedTables.h"
 
-#include <Framework/ASoA.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/runDataProcessing.h>
-
-#include <vector>
+#include "Framework/runDataProcessing.h"
 
 using namespace o2;
 using namespace o2::framework;

@@ -11,17 +11,13 @@
 
 /// \author Luca Micheletti <luca.micheletti@cern.ch>, CERN
 
+#include "Riostream.h"
+
 #include "CB2Pdf.h"
-
-#include <RooAbsPdf.h>
-#include <RooAbsReal.h>
-#include <TMath.h>
-#include <TMathBase.h>
-
-#include <Rtypes.h>
-#include <RtypesCore.h>
-
+#include "RooAbsReal.h"
+#include "RooAbsCategory.h"
 #include <math.h>
+#include "TMath.h"
 
 ClassImp(CB2Pdf);
 

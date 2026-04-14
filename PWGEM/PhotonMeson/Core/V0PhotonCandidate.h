@@ -22,9 +22,6 @@
 
 #include <KFParticle.h>
 
-#include <array>
-#include <cstdint>
-
 enum CentType : uint8_t {
   CentFT0M = 0,
   CentFT0A = 1,
@@ -74,7 +71,7 @@ struct V0PhotonCandidate {
     eleTPCSignal = ele.tpcSignal();
     eleITSClusterSizes = ele.itsClusterSizes();
 
-    chi2ndf = v0PV.GetChi2() / v0PV.GetNDF();
+    chi2ndf = v0DecayVtx.GetChi2() / v0DecayVtx.GetNDF();
     pca = posDecayVtx.GetDistanceFromParticle(eleDecayVtx);
     eta = RecoDecay::eta(std::array{px, py, pz});
     posEta = RecoDecay::eta(std::array{posPx, posPy, posPz});

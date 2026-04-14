@@ -23,9 +23,7 @@
 #include "Common/DataModel/PIDResponseTOF.h"
 #include "Common/TableProducer/PID/pidTOFBase.h"
 
-#include <Framework/AnalysisDataModel.h>
-
-#include <cstdint>
+#include "Framework/AnalysisDataModel.h"
 
 namespace o2::aod
 {

@@ -20,14 +20,10 @@
 #include "PWGCF/Femto/Core/modes.h"
 #include "PWGCF/Femto/Core/trackHistManager.h"
 
-#include <CommonConstants/MathConstants.h>
-#include <CommonConstants/PhysicsConstants.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/Logger.h>
-
-#include <TPDGCode.h>
+#include "CommonConstants/MathConstants.h"
+#include "Framework/Configurable.h"
+#include "Framework/HistogramRegistry.h"
+#include "Framework/HistogramSpec.h"
 
 #include <array>
 #include <map>

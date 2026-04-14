@@ -8,14 +8,13 @@
 // In applying this license CERN does not waive the privileges and immunities
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
-
-#include <TDirectory.h>
-#include <TDirectoryFile.h>
-#include <TFile.h>
-#include <TList.h>
-#include <TTree.h>
+// O2 includes
 
 #include <iostream>
+#include <string>
+#include "TFile.h"
+#include "TDirectory.h"
+#include "TTree.h"
 
 void splitFile(const char* inputFileName = "bcSelection.root", const char* outputFileName1 = "bcRanges.root")
 {

@@ -15,11 +15,9 @@
 #ifndef TOOLS_KFPARTICLE_QAKFEVENTTRACK_H_
 #define TOOLS_KFPARTICLE_QAKFEVENTTRACK_H_
 
-#include <Framework/AnalysisDataModel.h>
-
-#include <Rtypes.h>
-
-#include <cstdint>
+#include "Framework/AnalysisTask.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Common/Core/trackUtilities.h"
 
 enum FlagsTracks {
   kITS = BIT(0),

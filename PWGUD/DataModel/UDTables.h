@@ -25,13 +25,12 @@
 #include "Common/DataModel/PIDResponseTPC.h"
 #include "Common/DataModel/TrackSelectionTables.h"
 
-#include <Framework/ASoA.h>
-#include <Framework/AnalysisDataModel.h>
-
-#include <Rtypes.h>
+#include "Framework/ASoA.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/DataTypes.h"
+#include "MathUtils/Utils.h"
 
 #include <cmath>
-#include <cstdint>
 #include <vector>
 
 namespace o2::aod

@@ -15,12 +15,13 @@
 #ifndef PWGEM_PHOTONMESON_CORE_CUTSLIBRARY_H_
 #define PWGEM_PHOTONMESON_CORE_CUTSLIBRARY_H_
 
-#include "PWGEM/PhotonMeson/Core/DalitzEECut.h"
-#include "PWGEM/PhotonMeson/Core/EMCPhotonCut.h"
+#include <string>
 #include "PWGEM/PhotonMeson/Core/EMPhotonEventCut.h"
-#include "PWGEM/PhotonMeson/Core/PHOSPhotonCut.h"
-#include "PWGEM/PhotonMeson/Core/PairCut.h"
 #include "PWGEM/PhotonMeson/Core/V0PhotonCut.h"
+#include "PWGEM/PhotonMeson/Core/DalitzEECut.h"
+#include "PWGEM/PhotonMeson/Core/PHOSPhotonCut.h"
+#include "PWGEM/PhotonMeson/Core/EMCPhotonCut.h"
+#include "PWGEM/PhotonMeson/Core/PairCut.h"
 
 namespace o2::aod
 {

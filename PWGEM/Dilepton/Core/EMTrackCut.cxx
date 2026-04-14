@@ -15,11 +15,7 @@
 
 #include "PWGEM/Dilepton/Core/EMTrackCut.h"
 
-#include <Framework/Logger.h>
-
-#include <Rtypes.h>
-
-#include <cstdint>
+#include "Framework/Logger.h"
 
 ClassImp(EMTrackCut);
 

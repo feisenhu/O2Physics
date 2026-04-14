@@ -11,25 +11,21 @@
 
 // author: arvind.khuntia@cern.ch
 
-#include <CommonConstants/LHCConstants.h>
-#include <DataFormatsFDD/Digit.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/InitContext.h>
-#include <Framework/runDataProcessing.h>
+#include "Framework/runDataProcessing.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Common/DataModel/EventSelection.h"
+#include "DataFormatsFDD/Digit.h"
+#include "DataFormatsFIT/Triggers.h"
+#include "Common/DataModel/FT0Corrected.h"
 
-#include <TH1.h>
-#include <TH2.h>
-
-#include <algorithm>
-#include <bitset>
-#include <cstdint>
-#include <iterator>
-#include <map>
-#include <vector>
+#include "CCDB/CcdbApi.h"
+#include "CommonDataFormat/BunchFilling.h"
+#include "CCDB/BasicCCDBManager.h"
+#include "DataFormatsParameters/GRPObject.h"
+#include "DataFormatsParameters/GRPLHCIFData.h"
+#include "TH1F.h"
+#include "TH2F.h"
 
 using namespace o2;
 using namespace o2::framework;
@@ -115,7 +111,7 @@ struct VdMAO2D {
           registry.get<TH1>(HIST("FT0/bcVertexCollBC"))->Fill(localBC);
         }
       } // vertex
-    } // ft0
+    }   // ft0
     nTF++;
   } // process
 
@@ -178,7 +174,7 @@ struct VdMAO2D {
         }
 
       } // vertex
-    } // fdd
+    }   // fdd
   }
   PROCESS_SWITCH(VdMAO2D, processFDD, "Process FDD trigger rates for VdM", true);
 

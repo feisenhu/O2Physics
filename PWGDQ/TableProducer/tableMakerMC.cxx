@@ -26,7 +26,6 @@
 #include "PWGDQ/Core/VarManager.h"
 #include "PWGDQ/DataModel/ReducedInfoTables.h"
 
-#include "Common/CCDB/EventSelectionParams.h"
 #include "Common/CCDB/TriggerAliases.h"
 #include "Common/DataModel/Centrality.h"
 #include "Common/DataModel/CollisionAssociationTables.h"
@@ -36,30 +35,22 @@
 #include "Common/DataModel/PIDResponseTPC.h"
 #include "Common/DataModel/TrackSelectionTables.h"
 
-#include <CCDB/BasicCCDBManager.h>
-#include <DataFormatsParameters/GRPMagField.h>
-#include <DataFormatsParameters/GRPObject.h>
-#include <DetectorsBase/GeometryManager.h>
-#include <DetectorsBase/Propagator.h>
-#include <Framework/ASoA.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/DataTypes.h>
-#include <Framework/InitContext.h>
-#include <Framework/runDataProcessing.h>
-#include <ReconstructionDataFormats/TrackFwd.h>
+#include "CCDB/BasicCCDBManager.h"
+#include "DataFormatsParameters/GRPMagField.h"
+#include "DataFormatsParameters/GRPObject.h"
+#include "DetectorsBase/GeometryManager.h"
+#include "DetectorsBase/Propagator.h"
+#include "Field/MagneticField.h"
+#include "Framework/ASoA.h"
+#include "Framework/ASoAHelpers.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/DataTypes.h"
+#include "Framework/runDataProcessing.h"
 
-#include <THashList.h>
-#include <TList.h>
-#include <TObjArray.h>
-#include <TString.h>
+#include "TGeoGlobalMagField.h"
+#include "TList.h"
 
-#include <RtypesCore.h>
-
-#include <cstddef>
-#include <cstdint>
 #include <iostream>
 #include <map>
 #include <memory>

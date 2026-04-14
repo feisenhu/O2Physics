@@ -22,49 +22,42 @@
 #include "PWGDQ/Core/VarManager.h"
 #include "PWGDQ/DataModel/ReducedInfoTables.h"
 
-#include "Common/CCDB/RCTSelectionFlags.h"
+#include "Common/CCDB/TriggerAliases.h"
+#include "Common/CCDB/ctpRateFetcher.h"
 #include "Common/Core/PID/PIDTOFParamService.h"
 #include "Common/Core/TableHelper.h"
 #include "Common/Core/Zorro.h"
-#include "Common/Core/trackUtilities.h"
 #include "Common/DataModel/CollisionAssociationTables.h"
 #include "Common/DataModel/EventSelection.h"
+#include "Common/DataModel/McCollisionExtra.h"
 #include "Common/DataModel/Multiplicity.h"
-#include "Common/DataModel/PIDResponseTOF.h"
-#include "Common/DataModel/PIDResponseTPC.h"
 #include "Common/DataModel/TrackSelectionTables.h"
+#include <Common/Core/trackUtilities.h>
 
-#include <CCDB/BasicCCDBManager.h>
-#include <CCDB/CcdbApi.h>
-#include <CommonUtils/ConfigurableParam.h>
-#include <DataFormatsParameters/GRPMagField.h>
-#include <DataFormatsParameters/GRPObject.h>
-#include <DetectorsBase/GeometryManager.h>
-#include <DetectorsBase/MatLayerCylSet.h>
-#include <DetectorsBase/Propagator.h>
+#include "CCDB/BasicCCDBManager.h"
+#include "DataFormatsParameters/GRPMagField.h"
+#include "DataFormatsParameters/GRPObject.h"
+#include "DetectorsBase/GeometryManager.h"
+#include "DetectorsBase/Propagator.h"
+#include "Field/MagneticField.h"
+#include "Framework/ASoAHelpers.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisHelpers.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/runDataProcessing.h"
 #include <DetectorsVertexing/PVertexer.h>
-#include <Framework/ASoAHelpers.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/InitContext.h>
-#include <Framework/runDataProcessing.h>
 #include <ReconstructionDataFormats/Track.h>
 
-#include <TH2.h>
+#include "TGeoGlobalMagField.h"
+#include <TH1F.h>
+#include <TH3F.h>
 #include <THashList.h>
 #include <TList.h>
-#include <TMathBase.h>
+#include <TObjString.h>
 #include <TString.h>
 
-#include <RtypesCore.h>
-
-#include <chrono>
-#include <cstdint>
-#include <cstdlib>
+#include <algorithm>
 #include <iostream>
-#include <iterator>
 #include <map>
 #include <memory>
 #include <string>
@@ -79,7 +72,6 @@ using namespace o2;
 using namespace o2::framework;
 using namespace o2::framework::expressions;
 using namespace o2::aod;
-using namespace o2::common::core;
 
 Zorro zorro;
 
@@ -281,7 +273,6 @@ struct AnalysisEventSelection {
   // RCT selection
   struct : ConfigurableGroup {
     Configurable<bool> fConfigUseRCT{"cfgUseRCT", false, "Enable event selection with RCT flags"};
-    Configurable<bool> fCheckZDC{"cfgCheckZDC", false, "Check ZDC quality in the RCT flag checker"};
     Configurable<std::string> fConfigRCTLabel{"cfgRCTLabel", "CBT", "RCT flag labels : CBT, CBT_hadronPID, CBT_electronPID, CBT_calo, CBT_muon, CBT_muon_glo"};
   } fConfigRCT;
 
@@ -405,7 +396,7 @@ struct AnalysisEventSelection {
     }
 
     if (fConfigRCT.fConfigUseRCT.value) {
-      rctChecker.init(fConfigRCT.fConfigRCTLabel, fConfigRCT.fCheckZDC.value);
+      rctChecker.init(fConfigRCT.fConfigRCTLabel);
     }
 
     cout << "AnalysisEventSelection::init() completed" << endl;

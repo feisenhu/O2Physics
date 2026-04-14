@@ -14,14 +14,10 @@
 // Class for analysis cuts applied on the variables defined in the VarManager
 //
 
-#ifndef PWGDQ_CORE_ANALYSISCUT_H_
-#define PWGDQ_CORE_ANALYSISCUT_H_
+#ifndef AnalysisCut_H
+#define AnalysisCut_H
 
 #include <TF1.h>
-#include <TNamed.h>
-
-#include <Rtypes.h>
-
 #include <vector>
 
 //_________________________________________________________________________
@@ -180,4 +176,4 @@ inline bool AnalysisCut::IsSelected(float* values)
   return true;
 }
 
-#endif // PWGDQ_CORE_ANALYSISCUT_H_
+#endif

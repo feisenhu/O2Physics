@@ -22,9 +22,9 @@
 #include "PWGEM/PhotonMeson/Core/PairCut.h"
 #include "PWGEM/PhotonMeson/Core/V0PhotonCut.h"
 
-#include <Framework/Logger.h>
-
 #include <TString.h>
+
+#include <fairlogger/Logger.h>
 
 #include <cstddef>
 #include <regex>

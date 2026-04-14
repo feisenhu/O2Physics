@@ -26,21 +26,20 @@
 #include <Framework/ASoA.h>
 #include <Framework/Array2D.h>
 #include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/Logger.h>
 
 #include <Math/Vector3D.h> // IWYU pragma: keep
-#include <TH2.h>
+#include <Math/Vector3Dfwd.h>
+#include <Math/VectorUtil.h>
+#include <TMath.h>
 #include <TNamed.h>
 
-#include <sys/types.h>
+#include <fairlogger/Logger.h>
 
 #include <Rtypes.h>
 
 #include <algorithm>
 #include <cmath>
 #include <concepts>
-#include <cstddef>
 #include <cstdint>
 #include <functional>
 #include <set>

@@ -11,27 +11,17 @@
 //
 #include "PWGUD/DataModel/UDTables.h"
 
-#include <CommonConstants/PhysicsConstants.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/InitContext.h>
-#include <Framework/OutputObjHeader.h>
-#include <Framework/runDataProcessing.h>
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/runDataProcessing.h"
 
-#include <TH1.h>
-#include <TLorentzVector.h>
-#include <TMath.h>
+#include "TLorentzVector.h"
 #include <TString.h>
-#include <TVector3.h>
 
-#include <RtypesCore.h>
-
-#include <cmath>
-#include <cstddef>
+#include <iostream>
 #include <vector>
 
+using std::array;
 using namespace std;
 using namespace o2;
 using namespace o2::aod;

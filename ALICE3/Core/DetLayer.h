@@ -22,7 +22,6 @@
 #include <TGraph.h>
 #include <TString.h>
 
-#include <ostream>
 #include <string>
 
 namespace o2::fastsim

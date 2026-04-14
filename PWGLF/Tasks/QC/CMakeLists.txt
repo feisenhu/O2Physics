@@ -11,7 +11,7 @@
 
 o2physics_add_dpl_workflow(v0cascades-qa
     SOURCES v0cascadesqa.cxx
-    PUBLIC_LINK_LIBRARIES O2Physics::AnalysisCore O2Physics::AnalysisCCDB
+    PUBLIC_LINK_LIBRARIES O2Physics::AnalysisCore
     COMPONENT_NAME Analysis)
 
 o2physics_add_dpl_workflow(track-checks

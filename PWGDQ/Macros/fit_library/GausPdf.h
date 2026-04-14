@@ -11,16 +11,14 @@
 
 /// \author Luca Micheletti <luca.micheletti@cern.ch>, CERN
 
-#ifndef PWGDQ_MACROS_FIT_LIBRARY_GAUSPDF_H_
-#define PWGDQ_MACROS_FIT_LIBRARY_GAUSPDF_H_
+#ifndef GAUSPDF
+#define GAUSPDF
 
-#include <RooAbsPdf.h>
-#include <RooAbsReal.h>
-#include <RooRealProxy.h>
-#include <TObject.h>
-
-#include <Rtypes.h>
-#include <RtypesCore.h>
+#include "RooAbsPdf.h"
+#include "RooRealProxy.h"
+#include "RooCategoryProxy.h"
+#include "RooAbsReal.h"
+#include "RooAbsCategory.h"
 
 class GausPdf : public RooAbsPdf
 {
@@ -45,4 +43,4 @@ class GausPdf : public RooAbsPdf
   ClassDef(GausPdf, 1) // Your description goes here...
 };
 
-#endif // PWGDQ_MACROS_FIT_LIBRARY_GAUSPDF_H_
+#endif

@@ -19,7 +19,8 @@
 #ifndef ALICE3_DATAMODEL_COLLISIONALICE3_H_
 #define ALICE3_DATAMODEL_COLLISIONALICE3_H_
 
-#include <Framework/AnalysisDataModel.h>
+// O2 includes
+#include "Framework/AnalysisDataModel.h"
 
 namespace o2::aod
 {

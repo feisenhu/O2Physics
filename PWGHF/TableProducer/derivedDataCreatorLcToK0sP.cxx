@@ -16,6 +16,7 @@
 /// \author Luigi Dello Stritto <luigi.dello.stritto@cern.ch>, Marietta-Blau Institute
 /// \author Vít Kučera <vit.kucera@cern.ch>, Inha University
 
+#include "PWGHF/Core/DecayChannels.h"
 #include "PWGHF/Core/HfHelper.h"
 #include "PWGHF/DataModel/AliasTables.h"
 #include "PWGHF/DataModel/CandidateReconstructionTables.h"

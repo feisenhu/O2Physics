@@ -11,12 +11,6 @@
 
 #include "PWGDQ/Core/AnalysisCompositeCut.h"
 
-#include "AnalysisCut.h"
-
-#include <Rtypes.h>
-
-#include <vector>
-
 ClassImp(AnalysisCompositeCut)
 
   //____________________________________________________________________________

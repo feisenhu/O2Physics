@@ -208,11 +208,8 @@ struct HfDerivedDataCreatorDplusToPiKPi {
         candidate.pyProng2(),
         candidate.pzProng2(),
         candidate.tpcTofNSigmaPi0(),
-        candidate.tpcTofNSigmaPi1(),
-        candidate.tpcTofNSigmaPi2(),
-        candidate.tpcTofNSigmaKa0(),
         candidate.tpcTofNSigmaKa1(),
-        candidate.tpcTofNSigmaKa2());
+        candidate.tpcTofNSigmaPi2());
     }
     if (fillCandidateMl) {
       rowCandidateMl(

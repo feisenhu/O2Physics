@@ -46,7 +46,6 @@
 #include <tuple>
 #include <unordered_map>
 
-using namespace std;
 using namespace o2;
 using namespace o2::framework;
 using namespace o2::aod;

@@ -18,7 +18,7 @@
 
 #include "PWGCF/Femto/Core/modes.h"
 
-#include <Framework/Logger.h>
+#include "fairlogger/Logger.h"
 
 namespace o2::analysis::femto
 {

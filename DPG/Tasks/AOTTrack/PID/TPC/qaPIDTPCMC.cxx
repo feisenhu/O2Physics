@@ -15,24 +15,13 @@
 /// \brief  Task to produce QA output of the PID with TPC running on the MC.
 ///
 
+// O2 includes
 #include "Common/DataModel/PIDResponseTPC.h"
 
-#include <Framework/ASoA.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/InitContext.h>
-#include <Framework/OutputObjHeader.h>
-#include <Framework/SliceCache.h>
-#include <Framework/StaticFor.h>
-#include <Framework/runDataProcessing.h>
-
-#include <TString.h>
-
-#include <cstdint>
-#include <string_view>
+#include "Framework/AnalysisTask.h"
+#include "Framework/HistogramRegistry.h"
+#include "Framework/StaticFor.h"
+#include "Framework/runDataProcessing.h"
 
 using namespace o2;
 using namespace o2::framework;

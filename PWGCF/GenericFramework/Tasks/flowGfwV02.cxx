@@ -158,12 +158,11 @@ struct FlowGfwV02 {
   } cfgTrackCuts;
 
   struct : ConfigurableGroup {
-    ConfigurableAxis cfgAxisPt{"cfgAxisPt", {VARIABLE_WIDTH, 0.2f, 0.5f, 1.f, 1.5f, 2.f, 3.f, 4.f, 6.f, 10.f}, "pt axis for histograms"};
-    ConfigurableAxis cfgAxisNsigmaTPC{"cfgAxisNsigmaTPC", {80, -5.f, 5.f}, "nsigmaTPC axis"};
-    ConfigurableAxis cfgAxisNsigmaTOF{"cfgAxisNsigmaTOF", {80, -5.f, 5.f}, "nsigmaTOF axis"};
-    ConfigurableAxis cfgAxisNsigmaITS{"cfgAxisNsigmaITS", {80, -5.f, 5.f}, "nsigmaITS axis"};
-    ConfigurableAxis cfgAxisTpcSignal{"cfgAxisTpcSignal", {250, 0.f, 250.f}, "dEdx axis for TPC"};
-    ConfigurableAxis cfgAxisSigma{"cfgAxisSigma", {200, 0, 20}, "sigma axis for TPC"};
+    ConfigurableAxis cfgAxisPt{"cfgPIDHistograms_cfgAxisPt", {VARIABLE_WIDTH, 0.2f, 0.5f, 1.f, 1.5f, 2.f, 3.f, 4.f, 6.f, 10.f}, "pt axis for histograms"};
+    ConfigurableAxis cfgAxisNsigmaTPC{"cfgPIDHistograms_cfgAxisNsigmaTPC", {80, -5.f, 5.f}, "nsigmaTPC axis"};
+    ConfigurableAxis cfgAxisNsigmaTOF{"cfgPIDHistograms_cfgAxisNsigmaTOF", {80, -5.f, 5.f}, "nsigmaTOF axis"};
+    ConfigurableAxis cfgAxisNsigmaITS{"cfgPIDHistograms_cfgAxisNsigmaITS", {80, -5.f, 5.f}, "nsigmaITS axis"};
+    ConfigurableAxis cfgAxisTpcSignal{"cfgPIDHistograms_cfgAxisTpcSignal", {250, 0.f, 250.f}, "dEdx axis for TPC"};
   } cfgPIDHistograms;
 
   // GFW binning
@@ -244,22 +243,22 @@ struct FlowGfwV02 {
     std::array<float, 6> tofNsigmaCut;
     std::array<float, 6> itsNsigmaCut;
     std::array<float, 6> tpcNsigmaCut;
-    std::array<std::unique_ptr<TH1D>, 4> hPtMid{};
+    TH1D* hPtMid[4] = {nullptr, nullptr, nullptr, nullptr};
   };
   PIDState pidStates;
 
   // Event selection cuts - Alex
-  std::unique_ptr<TF1> fMultPVCutLow;
-  std::unique_ptr<TF1> fMultPVCutHigh;
-  std::unique_ptr<TF1> fMultCutLow;
-  std::unique_ptr<TF1> fMultCutHigh;
-  std::unique_ptr<TF1> fMultPVGlobalCutHigh;
-  std::unique_ptr<TF1> fMultGlobalV0ACutLow;
-  std::unique_ptr<TF1> fMultGlobalV0ACutHigh;
-  std::unique_ptr<TF1> fMultGlobalT0ACutLow;
-  std::unique_ptr<TF1> fMultGlobalT0ACutHigh;
+  TF1* fMultPVCutLow = nullptr;
+  TF1* fMultPVCutHigh = nullptr;
+  TF1* fMultCutLow = nullptr;
+  TF1* fMultCutHigh = nullptr;
+  TF1* fMultPVGlobalCutHigh = nullptr;
+  TF1* fMultGlobalV0ACutLow = nullptr;
+  TF1* fMultGlobalV0ACutHigh = nullptr;
+  TF1* fMultGlobalT0ACutLow = nullptr;
+  TF1* fMultGlobalT0ACutHigh = nullptr;
 
-  std::unique_ptr<TF1> fPtDepDCAxy;
+  TF1* fPtDepDCAxy = nullptr;
 
   using GFWTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksExtra, aod::TrackSelection, aod::TracksDCA, aod::pidTPCFullPi, aod::pidTPCFullKa, aod::pidTPCFullPr, aod::pidTOFbeta, aod::pidTOFFullPi, aod::pidTOFFullKa, aod::pidTOFFullPr>>;
 
@@ -316,15 +315,15 @@ struct FlowGfwV02 {
         registry.add("QA_PID/before/TofTpcNsigma_protons", "", {HistType::kTHnSparseD, {cfgPIDHistograms.cfgAxisNsigmaTPC, cfgPIDHistograms.cfgAxisNsigmaTOF, cfgPIDHistograms.cfgAxisPt}});
       }
 
-      registry.add("QA_PID/before/TpcdEdx_ptwise_pions", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/ExpTpcdEdx_ptwise_pions", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/ExpSigma_ptwise_pions", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisSigma, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/TpcdEdx_ptwise_kaons", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/ExpTpcdEdx_ptwise_kaons", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/ExpSigma_ptwise_kaons", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisSigma, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/TpcdEdx_ptwise_protons", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/ExpTpcdEdx_ptwise_protons", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
-      registry.add("QA_PID/before/ExpSigma_ptwise_protons", "", {HistType::kTHnSparseD, {{cfgPIDHistograms.cfgAxisPt, cfgPIDHistograms.cfgAxisSigma, cfgPIDHistograms.cfgAxisNsigmaTOF}}});
+      registry.add("QA_PID/before/TpcdEdx_ptwise_pions", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/ExpTpcdEdx_ptwise_pions", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/ExpSigma_ptwise_pions", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/TpcdEdx_ptwise_kaons", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/ExpTpcdEdx_ptwise_kaons", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/ExpSigma_ptwise_kaons", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/TpcdEdx_ptwise_protons", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/ExpTpcdEdx_ptwise_protons", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
+      registry.add("QA_PID/before/ExpSigma_ptwise_protons", "", {HistType::kTH2D, {cfgPIDHistograms.cfgAxisTpcSignal, cfgPIDHistograms.cfgAxisPt}});
       registry.addClone("QA_PID/before/", "QA_PID/after/");
     }
 
@@ -361,10 +360,10 @@ struct FlowGfwV02 {
     o2::analysis::gfw::multGlobalPVCorrCutPars = cfgMultCorrCuts.cfgMultGlobalPVCutPars;
 
     // Initialise pt spectra histograms for different particles
-    pidStates.hPtMid[PidCharged] = std::make_unique<TH1D>("hPtMid_charged", "hPtMid_charged", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
-    pidStates.hPtMid[PidPions] = std::make_unique<TH1D>("hPtMid_pions", "hPtMid_pions", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
-    pidStates.hPtMid[PidKaons] = std::make_unique<TH1D>("hPtMid_kaons", "hPtMid_kaons", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
-    pidStates.hPtMid[PidProtons] = std::make_unique<TH1D>("hPtMid_protons", "hPtMid_protons", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
+    pidStates.hPtMid[PidCharged] = new TH1D("hPtMid_charged", "hPtMid_charged", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
+    pidStates.hPtMid[PidPions] = new TH1D("hPtMid_pions", "hPtMid_pions", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
+    pidStates.hPtMid[PidKaons] = new TH1D("hPtMid_kaons", "hPtMid_kaons", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
+    pidStates.hPtMid[PidProtons] = new TH1D("hPtMid_protons", "hPtMid_protons", o2::analysis::gfw::ptbinning.size() - 1, &o2::analysis::gfw::ptbinning[0]);
     pidStates.hPtMid[PidCharged]->SetDirectory(nullptr);
     pidStates.hPtMid[PidPions]->SetDirectory(nullptr);
     pidStates.hPtMid[PidKaons]->SetDirectory(nullptr);
@@ -466,7 +465,6 @@ struct FlowGfwV02 {
       LOGF(error, "Configuration contains vectors of different size - check the GFWCorrConfig configurable");
     fGFW->CreateRegions();
     TObjArray* oba = new TObjArray();
-    oba->SetOwner(kTRUE);
     addConfigObjectsToObjArray(oba, corrconfigs);
     LOGF(info, "Number of correlators: %d", oba->GetEntries());
     fFC->SetName("FlowContainer");
@@ -502,19 +500,19 @@ struct FlowGfwV02 {
     }
 
     if (cfgUseAdditionalEventCut) {
-      fMultPVCutLow = std::make_unique<TF1>("fMultPVCutLow", cfgMultCorrCuts.cfgMultCorrLowCutFunction->c_str(), 0, 100);
+      fMultPVCutLow = new TF1("fMultPVCutLow", cfgMultCorrCuts.cfgMultCorrLowCutFunction->c_str(), 0, 100);
       fMultPVCutLow->SetParameters(&(o2::analysis::gfw::multPVCorrCutPars[0]));
-      fMultPVCutHigh = std::make_unique<TF1>("fMultPVCutHigh", cfgMultCorrCuts.cfgMultCorrHighCutFunction->c_str(), 0, 100);
+      fMultPVCutHigh = new TF1("fMultPVCutHigh", cfgMultCorrCuts.cfgMultCorrHighCutFunction->c_str(), 0, 100);
       fMultPVCutHigh->SetParameters(&(o2::analysis::gfw::multPVCorrCutPars[0]));
-      fMultCutLow = std::make_unique<TF1>("fMultCutLow", cfgMultCorrCuts.cfgMultCorrLowCutFunction->c_str(), 0, 100);
+      fMultCutLow = new TF1("fMultCutLow", cfgMultCorrCuts.cfgMultCorrLowCutFunction->c_str(), 0, 100);
       fMultCutLow->SetParameters(&(o2::analysis::gfw::multGlobalCorrCutPars[0]));
-      fMultCutHigh = std::make_unique<TF1>("fMultCutHigh", cfgMultCorrCuts.cfgMultCorrHighCutFunction->c_str(), 0, 100);
+      fMultCutHigh = new TF1("fMultCutHigh", cfgMultCorrCuts.cfgMultCorrHighCutFunction->c_str(), 0, 100);
       fMultCutHigh->SetParameters(&(o2::analysis::gfw::multGlobalCorrCutPars[0]));
-      fMultPVGlobalCutHigh = std::make_unique<TF1>("fMultPVGlobalCutHigh", cfgMultCorrCuts.cfgMultGlobalPVCorrCutFunction->c_str(), 0, nchbinning.back());
+      fMultPVGlobalCutHigh = new TF1("fMultPVGlobalCutHigh", cfgMultCorrCuts.cfgMultGlobalPVCorrCutFunction->c_str(), 0, nchbinning.back());
       fMultPVGlobalCutHigh->SetParameters(&(o2::analysis::gfw::multGlobalPVCorrCutPars[0]));
     }
     // Set DCAxy cut
-    fPtDepDCAxy = std::make_unique<TF1>("ptDepDCAxy", Form("[0]*%s", cfgTrackCuts.cfgDCAxy->c_str()), 0.001, 100);
+    fPtDepDCAxy = new TF1("ptDepDCAxy", Form("[0]*%s", cfgTrackCuts.cfgDCAxy->c_str()), 0.001, 100);
     fPtDepDCAxy->SetParameter(0, cfgTrackCuts.cfgDCAxyNSigma);
   }
 
@@ -1008,7 +1006,7 @@ struct FlowGfwV02 {
 
     if (!withinPtPOI && !withinPtRef)
       return;
-    double weff = getEfficiency(track, PidCharged);
+    double weff = getJTrackEfficiency(track);
     if (weff < 0)
       return;
 
@@ -1017,13 +1015,13 @@ struct FlowGfwV02 {
     // Fill cumulants for different particles
     // ***Need to add proper weights for each particle!***
     if (withinPtRef)
-      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, 1);
+      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, 0);
     if (withinPtPOI && pidInd == PidPions)
-      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, PidPions + 1);
+      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, PidPions);
     if (withinPtPOI && pidInd == PidKaons)
-      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, PidKaons + 1);
+      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, PidKaons);
     if (withinPtPOI && pidInd == PidProtons)
-      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, PidProtons + 1);
+      fGFW->Fill(track.eta(), fSecondAxis->FindBin(track.pt()) - 1, track.phi(), weff * wacc, PidProtons);
     return;
   }
 

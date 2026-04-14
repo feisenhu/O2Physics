@@ -15,9 +15,6 @@
 #ifndef PWGEM_DILEPTON_UTILS_EMFWDTRACK_H_
 #define PWGEM_DILEPTON_UTILS_EMFWDTRACK_H_
 
-#include <cmath>
-#include <cstdint>
-
 namespace o2::aod::pwgem::dilepton::utils
 {
 class EMFwdTrack

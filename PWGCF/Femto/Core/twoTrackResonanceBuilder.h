@@ -16,6 +16,8 @@
 #ifndef PWGCF_FEMTO_CORE_TWOTRACKRESONANCEBUILDER_H_
 #define PWGCF_FEMTO_CORE_TWOTRACKRESONANCEBUILDER_H_
 
+#include "RecoDecay.h"
+
 #include "PWGCF/Femto/Core/baseSelection.h"
 #include "PWGCF/Femto/Core/dataTypes.h"
 #include "PWGCF/Femto/Core/femtoUtils.h"
@@ -23,18 +25,15 @@
 #include "PWGCF/Femto/Core/selectionContainer.h"
 #include "PWGCF/Femto/DataModel/FemtoTables.h"
 
-#include <Common/Core/RecoDecay.h>
+#include "CommonConstants/MathConstants.h"
+#include "CommonConstants/PhysicsConstants.h"
+#include "Framework/ASoAHelpers.h"
+#include "Framework/AnalysisHelpers.h"
+#include "Framework/Configurable.h"
 
-#include <CommonConstants/MathConstants.h>
-#include <CommonConstants/PhysicsConstants.h>
-#include <Framework/ASoAHelpers.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/Logger.h>
+#include <Math/Vector4D.h>
 
-#include <Math/Vector4D.h> // IWYU pragma: keep (do not replace with Math/Vector4Dfwd.h)
-#include <Math/Vector4Dfwd.h>
+#include "fairlogger/Logger.h"
 
 #include <algorithm>
 #include <array>

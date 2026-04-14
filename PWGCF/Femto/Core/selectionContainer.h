@@ -16,10 +16,11 @@
 #ifndef PWGCF_FEMTO_CORE_SELECTIONCONTAINER_H_
 #define PWGCF_FEMTO_CORE_SELECTIONCONTAINER_H_
 
-#include <CommonConstants/MathConstants.h>
-#include <Framework/Logger.h>
+#include "CommonConstants/MathConstants.h"
 
-#include <TF1.h>
+#include "TF1.h"
+
+#include "fairlogger/Logger.h"
 
 #include <algorithm>
 #include <bitset>
@@ -27,7 +28,6 @@
 #include <cmath>
 #include <cstddef>
 #include <limits>
-#include <sstream>
 #include <string>
 #include <unordered_map>
 #include <utility>

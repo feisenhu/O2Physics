@@ -13,21 +13,12 @@
 /// dependencies: o2-analysis-calo-cluster
 /// \author daiki.sekihata@cern.ch
 
-#include "PWGEM/PhotonMeson/DataModel/gammaTables.h"
-
+#include "Framework/runDataProcessing.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/AnalysisDataModel.h"
 #include "Common/DataModel/CaloClusters.h"
-
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/InitContext.h>
-#include <Framework/runDataProcessing.h>
-#include <PHOSBase/Geometry.h>
-
-#include <TH1.h>
+#include "PHOSBase/Geometry.h"
+#include "PWGEM/PhotonMeson/DataModel/gammaTables.h"
 
 using namespace o2;
 using namespace o2::framework;

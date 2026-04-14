@@ -8,25 +8,18 @@
 // In applying this license CERN does not waive the privileges and immunities
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
+// O2 includes
 
-#include <CommonDataFormat/IRFrame.h>
-#include <CommonDataFormat/InteractionRecord.h>
-
+#include <cmath>
+#include <vector>
+#include <regex>
+#include <iostream>
 #include <TFile.h>
 #include <TGrid.h>
 #include <TH1.h>
 #include <TTree.h>
-
-#include <Rtypes.h>
-#include <RtypesCore.h>
-
-#include <algorithm>
-#include <cmath>
-#include <iostream>
-#include <memory>
-#include <regex>
-#include <string>
-#include <vector>
+#include "CommonDataFormat/InteractionRecord.h"
+#include "CommonDataFormat/IRFrame.h"
 
 using o2::InteractionRecord;
 using o2::dataformats::IRFrame;
@@ -194,7 +187,7 @@ std::string getRunNumber(std::string fileName)
 }
 
 // Detailed checks for specific trigger, not enabled by default
-void checkBCForSelectedTrg(std::vector<selectedFrames>& originalFrames, std::vector<selectedFrames>& skimmedFrames, std::string runNumber, std::string triggerLabel)
+void checkBCForSelectedTrg(std::vector<selectedFrames>& originalFrames, std::vector<selectedFrames>& skimmedFrames, string runNumber, string triggerLabel)
 {
 
   TH1D hTriggerCounter("hTriggerCounter", (runNumber + " " + triggerLabel + ";;Total number of trigger").data(), 2, -0.5, 1.5);
@@ -335,7 +328,7 @@ void checkBCForSelectedTrg(std::vector<selectedFrames>& originalFrames, std::vec
 void checkBCForSelectedTrg(std::string AnaFileName = "AnalysisResults.root", std::string originalFileName = "bcRanges_fullrun.root", std::string skimmedFileName = "bcRanges_fullrun_skimmed.root", int triggerID = 1, bool useAlien = true)
 {
 
-  std::string runNumber = getRunNumber(originalFileName);
+  string runNumber = getRunNumber(originalFileName);
   if (useAlien) {
     TGrid::Connect("alien://");
     AnaFileName = "alien://" + AnaFileName;
@@ -372,7 +365,7 @@ void checkBCForSelectedTrg(std::string AnaFileName = "AnalysisResults.root", std
 void checkBCrangesSkimming(std::string AnaFileName = "AnalysisResults.root", std::string originalFileName = "bcRanges_fullrun.root", std::string skimmedFileName = "bcRanges_fullrun_skimmed.root", bool useAlien = true)
 {
 
-  std::string runNumber = getRunNumber(originalFileName);
+  string runNumber = getRunNumber(originalFileName);
   if (useAlien) {
     TGrid::Connect("alien://");
     AnaFileName = "alien://" + AnaFileName;

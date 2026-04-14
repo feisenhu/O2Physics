@@ -11,13 +11,12 @@
 
 #ifndef PWGMM_MULT_DATAMODEL_REDUCEDTABLES_H_
 #define PWGMM_MULT_DATAMODEL_REDUCEDTABLES_H_
-#include "Common/DataModel/Centrality.h"
-#include "Common/DataModel/Multiplicity.h"
-#include "Common/DataModel/TrackSelectionTables.h"
-
-#include <Framework/AnalysisDataModel.h>
-
 #include <vector>
+
+#include "Framework/AnalysisDataModel.h"
+#include "Common/DataModel/Multiplicity.h"
+#include "Common/DataModel/Centrality.h"
+#include "Common/DataModel/TrackSelectionTables.h"
 
 namespace o2::aod
 {

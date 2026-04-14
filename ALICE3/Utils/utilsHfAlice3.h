@@ -19,11 +19,6 @@
 
 #include "PWGHF/Core/HfHelper.h"
 
-#include "Common/Core/RecoDecay.h"
-
-#include <CommonConstants/PhysicsConstants.h>
-#include <Framework/Logger.h>
-
 namespace o2::analysis
 {
 

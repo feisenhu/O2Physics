@@ -16,29 +16,12 @@
 /// \brief  Implementation for QA tasks of the TPC signal (lite task, refer to qaPIDTPC.cxx for full TPC QA for PID)
 ///
 
-#include "Common/DataModel/EventSelection.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/runDataProcessing.h"
+#include "Framework/HistogramRegistry.h"
+#include "Framework/StaticFor.h"
 #include "Common/DataModel/TrackSelectionTables.h"
-
-#include <Framework/ASoA.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Configurable.h>
-#include <Framework/Expressions.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/InitContext.h>
-#include <Framework/OutputObjHeader.h>
-#include <Framework/runDataProcessing.h>
-
-#include <TH1.h>
-#include <TH2.h>
-#include <TH3.h>
-#include <TString.h>
-
-#include <array>
-#include <chrono>
-#include <cstdlib>
-#include <memory>
+#include "Common/DataModel/EventSelection.h"
 
 using namespace o2;
 using namespace o2::framework;

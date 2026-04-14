@@ -21,18 +21,18 @@
 
 #include "ALICE3/Core/TrackUtilities.h"
 
-#include <CommonConstants/PhysicsConstants.h>
-#include <MathUtils/Primitive2D.h>
-#include <ReconstructionDataFormats/Track.h>
+#include "ReconstructionDataFormats/Track.h"
 
-#include <TDecayChannel.h> // IWYU pragma: keep
+#include <TDatabasePDG.h>
+#include <TDecayChannel.h>
 #include <TGenPhaseSpace.h>
 #include <TLorentzVector.h>
+#include <TParticlePDG.h>
 #include <TRandom3.h>
 
 #include <array>
 #include <cmath>
-#include <cstddef>
+#include <string>
 #include <vector>
 
 namespace o2

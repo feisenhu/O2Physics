@@ -21,8 +21,6 @@
 
 #include <Framework/ASoA.h>
 #include <Framework/AnalysisDataModel.h> // IWYU pragma: keep
-#include <Framework/DataTypes.h>
-#include <SimulationDataFormat/MCGenProperties.h>
 
 #include <cmath>
 #include <cstdint>

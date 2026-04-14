@@ -27,14 +27,22 @@
 #include <CCDB/BasicCCDBManager.h>
 #include <ReconstructionDataFormats/Track.h>
 
-#include <cmath>
+#include <TRandom.h>
+
 #include <cstdio>
-#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <string>
 
 ///////////////////////////////
 /// DelphesO2/src/lutCovm.hh //
 ///////////////////////////////
 
+/// @author: Roberto Preghenella
+/// @email: preghenella@bo.infn.it
+
+// #pragma // once
 #define LUTCOVM_VERSION 20210801
 
 struct map_t {
@@ -146,6 +154,17 @@ struct lutEntry_t {
 /// DelphesO2/src/TrackSmearer.hh //
 ////////////////////////////////////
 
+/// @author: Roberto Preghenella
+/// @email: preghenella@bo.infn.it
+
+// #ifndef _DelphesO2_TrackSmearer_h_
+// #define _DelphesO2_TrackSmearer_h_
+
+// #include "ReconstructionDataFormats/Track.h"
+// #include "classes/DelphesClasses.h"
+// #include "lutCovm.hh"
+// #include <map>
+
 using O2Track = o2::track::TrackParCov;
 
 namespace o2
@@ -250,9 +269,10 @@ class TrackSmearer
 } // namespace delphes
 } // namespace o2
 
+// #endif /** _DelphesO2_TrackSmearer_h_ **/
+
 namespace o2::delphes
 {
 using DelphesO2TrackSmearer = TrackSmearer;
 }
-
 #endif // ALICE3_CORE_DELPHESO2TRACKSMEARER_H_

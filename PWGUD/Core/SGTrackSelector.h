@@ -16,10 +16,18 @@
 #ifndef PWGUD_CORE_SGTRACKSELECTOR_H_
 #define PWGUD_CORE_SGTRACKSELECTOR_H_
 
-#include <TVector3.h>
+#include "PWGUD/Core/SGSelector.h"
+#include "PWGUD/DataModel/UDTables.h"
 
-#include <cmath>
-#include <stdexcept>
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/O2DatabasePDGPlugin.h"
+#include "Framework/runDataProcessing.h"
+
+#include "TVector3.h"
+#include <TString.h>
+
+#include <iostream>
 #include <vector>
 
 template <typename T>

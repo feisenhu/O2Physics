@@ -18,12 +18,11 @@
 #ifndef ALICE3_DATAMODEL_A3DECAYFINDERTABLES_H_
 #define ALICE3_DATAMODEL_A3DECAYFINDERTABLES_H_
 
+// O2 includes
 #include "Common/Core/RecoDecay.h"
 
-#include <Framework/AnalysisDataModel.h>
-
-#include <array>
-#include <cstdint>
+#include "CommonConstants/PhysicsConstants.h"
+#include "Framework/AnalysisDataModel.h"
 
 enum a3selectionBit : uint32_t { kDCAxy = 0,
                                  kInnerTOFPion,

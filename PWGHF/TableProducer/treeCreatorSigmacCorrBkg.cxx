@@ -41,7 +41,6 @@
 
 #include <cstdint>
 #include <cstdlib>
-#include <numeric>
 
 using namespace o2;
 using namespace o2::framework; // for Produces, Configuable

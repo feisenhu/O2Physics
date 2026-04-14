@@ -22,39 +22,36 @@
 #include "PWGDQ/Core/VarManager.h"
 #include "PWGDQ/DataModel/ReducedInfoTables.h"
 
-#include <CCDB/BasicCCDBManager.h>
-#include <CCDB/CcdbApi.h>
-#include <DataFormatsParameters/GRPMagField.h>
-#include <DetectorsBase/GeometryManager.h>
-#include <DetectorsBase/MatLayerCylSet.h>
-#include <DetectorsBase/Propagator.h>
-#include <Framework/ASoAHelpers.h>
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Array2D.h>
-#include <Framework/BinningPolicy.h>
-#include <Framework/Configurable.h>
-#include <Framework/InitContext.h>
-#include <Framework/runDataProcessing.h>
+#include "Common/CCDB/EventSelectionParams.h"
 
-#include <TH1.h>
-#include <TH2.h>
+#include "CCDB/BasicCCDBManager.h"
+#include "DataFormatsParameters/GRPMagField.h"
+#include "DataFormatsParameters/GRPObject.h"
+#include "DetectorsBase/GeometryManager.h"
+#include "DetectorsBase/Propagator.h"
+#include "Field/MagneticField.h"
+#include "Framework/ASoAHelpers.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/runDataProcessing.h"
+#include "ITSMFTBase/DPLAlpideParam.h"
+
+#include "TGeoGlobalMagField.h"
+#include <TH1F.h>
+#include <TH3F.h>
 #include <THashList.h>
 #include <TList.h>
 #include <TString.h>
 
-#include <RtypesCore.h>
-
-#include <chrono>
-#include <cstddef>
-#include <cstdint>
+#include <algorithm>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <string>
-#include <variant>
 #include <vector>
 
+using std::cout;
+using std::endl;
 using std::string;
 
 using namespace o2;

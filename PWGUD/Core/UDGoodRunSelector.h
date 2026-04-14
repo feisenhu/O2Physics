@@ -12,8 +12,8 @@
 #ifndef PWGUD_CORE_UDGOODRUNSELECTOR_H_
 #define PWGUD_CORE_UDGOODRUNSELECTOR_H_
 
-#include <map>
 #include <string>
+#include <map>
 #include <vector>
 
 // A class to select good runs

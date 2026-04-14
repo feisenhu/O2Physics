@@ -19,6 +19,8 @@
 #include "Tools/ML/MlResponse.h"
 
 #include <cstdint>
+#include <map>
+#include <string>
 #include <vector>
 
 // Fill the map of available input features

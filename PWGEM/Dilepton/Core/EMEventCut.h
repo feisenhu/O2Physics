@@ -18,9 +18,12 @@
 
 #include "PWGEM/Dilepton/DataModel/dileptonTables.h"
 
-#include <TNamed.h>
+#include "Common/CCDB/EventSelectionParams.h"
+#include "Common/CCDB/TriggerAliases.h"
 
-#include <Rtypes.h>
+#include "TNamed.h"
+
+using namespace std;
 
 class EMEventCut : public TNamed
 {

@@ -17,40 +17,47 @@
 // when dealing with derived data.
 
 #include "PWGDQ/DataModel/ReducedInfoTables.h"
+#include "PWGLF/DataModel/EPCalibrationTables.h"
+#include "PWGLF/DataModel/LFParticleIdentification.h"
+#include "PWGLF/DataModel/LFStrangenessPIDTables.h"
+#include "PWGLF/DataModel/LFStrangenessTables.h"
 
-#include "Common/DataModel/Centrality.h"
+#include "Common/Core/RecoDecay.h"
+#include "Common/Core/TrackSelection.h"
+#include "Common/Core/trackUtilities.h"
 #include "Common/DataModel/McCollisionExtra.h"
-#include "Common/DataModel/Multiplicity.h"
+#include "Common/DataModel/Qvectors.h"
+#include "Common/DataModel/TrackSelectionTables.h"
+#include "Common/TableProducer/PID/pidTOFBase.h"
 
-#include <Framework/AnalysisDataModel.h>
-#include <Framework/AnalysisHelpers.h>
-#include <Framework/AnalysisTask.h>
-#include <Framework/Array2D.h>
-#include <Framework/Configurable.h>
-#include <Framework/HistogramRegistry.h>
-#include <Framework/HistogramSpec.h>
-#include <Framework/InitContext.h>
-#include <Framework/OutputObjHeader.h>
-#include <Framework/StaticFor.h>
-#include <Framework/runDataProcessing.h>
+#include "CCDB/BasicCCDBManager.h"
+#include "CommonConstants/PhysicsConstants.h"
+#include "DCAFitter/DCAFitterN.h"
+#include "DataFormatsParameters/GRPMagField.h"
+#include "DataFormatsParameters/GRPObject.h"
+#include "DetectorsBase/GeometryManager.h"
+#include "DetectorsBase/Propagator.h"
+#include "Framework/ASoAHelpers.h"
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/RunningWorkflowInfo.h"
+#include "Framework/StaticFor.h"
+#include "Framework/runDataProcessing.h"
+#include "ReconstructionDataFormats/Track.h"
 
-#include <TH2.h>
-#include <TMathBase.h>
-#include <TString.h>
-
-#include <RtypesCore.h>
-
-#include <algorithm>
+#include <array>
 #include <cmath>
-#include <cstdint>
 #include <cstdlib>
+#include <iterator>
+#include <map>
 #include <string>
-#include <string_view>
+#include <utility>
 #include <vector>
 
 using namespace o2;
 using namespace o2::framework;
 using namespace o2::framework::expressions;
+using std::array;
 
 // simple bit checkers
 #define bitset(var, nbit) ((var) |= (1 << (nbit)))
