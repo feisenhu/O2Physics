@@ -1051,6 +1051,9 @@ struct SingleTrackQCMC {
           if (cfgEventGeneratorType >= 0 && mccollision_from_track.getSubGeneratorId() != cfgEventGeneratorType) {
             continue;
           }
+          if (cfgRequireTrueAssociation && (mctrack.emmceventId() != collision.emmceventId())) {
+            continue;
+          }
 
           if (dielectroncuts.cfg_pid_scheme == static_cast<int>(DielectronCut::PIDSchemes::kPIDML)) {
             if (!cut.template IsSelectedTrack<false>(track)) {
@@ -1068,6 +1071,9 @@ struct SingleTrackQCMC {
           auto mctrack = track.template emmcparticle_as<TMCParticles>();
           auto mccollision_from_track = mctrack.template emmcevent_as<TMCCollisions>();
           if (cfgEventGeneratorType >= 0 && mccollision_from_track.getSubGeneratorId() != cfgEventGeneratorType) {
+            continue;
+          }
+          if (cfgRequireTrueAssociation && (mctrack.emmceventId() != collision.emmceventId())) {
             continue;
           }
           if (!cut.template IsSelectedTrack<false>(track)) {
